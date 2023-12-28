@@ -10,7 +10,7 @@ class Character {
         this.inv = new Inventory()
     }
     checkStats() {
-        console.log(`Health: ${this.health}/100 \nBloodglut: ${this.bloodglut} \nInventory: ${this.inv}`)
+        console.log(`Health: ${this.health}/100 \nBloodglut: ${this.bloodglut} \nInventory: ${this.inv.getItems()}`)
     }
     checkDraculaStats() {
         console.log(`Dracula's Health: ${this.health}/100`)
@@ -64,7 +64,7 @@ class Inventory {
         console.log(`You have picked up ${name}!`)
     }
     getItems() {
-        return `${this.items}`
+        return this.items.join(', ')
     }
     hasItem(name) {
         return name in this.items
@@ -85,7 +85,28 @@ class Notebook {
             }
           })
     }
-}
+
+    writeNotebook(content) {
+        content = input.prompt("What would you like to write? ")
+        fs.appendFile("notebook.txt", content + "\n", (err) => {
+            if (err) {
+                console.error('Error writing to the file:', err)
+            } else {
+                console.log('Notebook updated!')
+            }
+        })
+    }
+    resetNotebook() {
+        fs.writeFile("notebook.txt", "", (err) => {
+            if (err) {
+                console.error('Error writing to the file:', err)
+            } else {
+                console.log('')
+            }
+        })
+    }
+    }
+
 
 
 module.exports = {

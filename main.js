@@ -1,9 +1,10 @@
 const classes = require('./classes')
 const variables = require('./globalVariables')
+const prompt = require('./prompts')
 const input = require('./functions')
 
-const notebook = new classes.Notebook()
-const character = new classes.Character("Dartha")
+
+const mainCharacter = new classes.Character("Dartha")
 
 
 
@@ -18,8 +19,16 @@ const character = new classes.Character("Dartha")
 // }
 
 // useNumber()
-// callan = prompt("What's your name?")
 
-notebook.readNotebook()
-character.checkStats()
+// character.inv.addItem("Golden Ticket")
+// character.inv.addItem("Silver Ticket")
+
+// notebook.readNotebook()
+// notebook.writeNotebook()
+
+// character.checkStats()
+// character.inv.getItems()
 // console.log(typeof notebook)
+
+
+input.options(prompt.cellRoomPromptList11, "Cell")
