@@ -1,0 +1,16 @@
+{
+    "name": "prompt-sync",
+    "version": "4.2.0",
+    "description": "a synchronous prompt for node.js",
+    "main": "index.js",
+    "scripts": {
+        "test": "node test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/heapwolf/prompt-sync.git"
+    },
+    "dependencies": {
+        "prompt-sync": "^4.2.0"
+    }
+}
