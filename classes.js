@@ -4,13 +4,13 @@ const input = require('./functions')
 
 class Character {
     constructor(name) {
-        self.name = name
-        self.health = 100
-        self.bloodglut = 0
-        self.inv = Inventory
+        this.name = name
+        this.health = 100
+        this.bloodglut = 0
+        this.inv = new Inventory()
     }
     checkStats() {
-        console.log(`Health: ${this.health}/100 \n Bloodglut: ${this.bloodglut} \n Inventory: ${this.inv.getItems}`)
+        console.log(`Health: ${this.health}/100 \nBloodglut: ${this.bloodglut} \nInventory: ${this.inv}`)
     }
     checkDraculaStats() {
         console.log(`Dracula's Health: ${this.health}/100`)
@@ -45,7 +45,6 @@ class Character {
     }
 }
 
-module.exports = Character
 
 class Inventory {
     constructor() {
@@ -74,7 +73,7 @@ class Inventory {
 }
 
 
-module.exports = Inventory
+
 
 class Notebook {
     readNotebook() {
@@ -89,4 +88,8 @@ class Notebook {
 }
 
 
-module.exports = Notebook
+module.exports = {
+    Notebook: Notebook,
+    Inventory: Inventory,
+    Character: Character
+}

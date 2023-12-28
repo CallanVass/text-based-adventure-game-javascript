@@ -1,7 +1,9 @@
-const Notebook = require('./classes.js')
+const classes = require('./classes')
+const variables = require('./globalVariables')
 const input = require('./functions')
 
-const notebook = new Notebook()
+const notebook = new classes.Notebook()
+const character = new classes.Character("Dartha")
 
 
 
@@ -19,4 +21,5 @@ const notebook = new Notebook()
 // callan = prompt("What's your name?")
 
 notebook.readNotebook()
+character.checkStats()
 // console.log(typeof notebook)
