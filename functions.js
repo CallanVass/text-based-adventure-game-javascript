@@ -1,5 +1,6 @@
 const globals = require('./globalVariables')
 const classes = require('./classes')
+const main = require('./main')
 
 // Allows us to call prompt in place of input()
 const prompt = require('prompt-sync')()
@@ -26,10 +27,18 @@ function canWrite(prompt) {
 // List of options for selection
 function options(optionsList, room) {
     console.log(`You are currently in: ${room}`)
-    for (key in optionsList) {
-        value = Object.values[key]
-        console.log(`Option ${key + 1}: ${value}`)
-    }
+    
+    optionsList.forEach((value, index) => {
+        console.log(`Option ${index + 1}: ${value}`)
+    })
+    return
+}
+
+function displayStats(character) {
+    let prompt = "What do you want to do?"
+    character.checkStats()
+    console.log(prompt)
+    return
 }
 
 module.exports = {
@@ -37,5 +46,6 @@ module.exports = {
     appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,
+    displayStats: displayStats
 }
 

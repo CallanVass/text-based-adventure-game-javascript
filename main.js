@@ -20,7 +20,7 @@ const mainCharacter = new classes.Character("Dartha")
 
 // useNumber()
 
-// character.inv.addItem("Golden Ticket")
+mainCharacter.inv.addItem("Golden Ticket")
 // character.inv.addItem("Silver Ticket")
 
 // notebook.readNotebook()
@@ -30,5 +30,5 @@ const mainCharacter = new classes.Character("Dartha")
 // character.inv.getItems()
 // console.log(typeof notebook)
 
-
+input.displayStats(mainCharacter)
 input.options(prompt.cellRoomPromptList11, "Cell")
