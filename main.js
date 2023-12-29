@@ -20,7 +20,7 @@ const mainCharacter = new classes.Character("Dartha")
 
 // useNumber()
 
-mainCharacter.inv.addItem("Golden Ticket")
+// mainCharacter.inv.addItem("Golden Ticket")
 // character.inv.addItem("Silver Ticket")
 
 // notebook.readNotebook()
@@ -30,5 +30,13 @@ mainCharacter.inv.addItem("Golden Ticket")
 // character.inv.getItems()
 // console.log(typeof notebook)
 
-input.displayStats(mainCharacter)
-input.options(prompt.cellRoomPromptList11, "Cell")
+// input.displayStats(mainCharacter)
+// input.options(prompt.cellRoomPromptList11, "Cell")
+
+
+mainCharacter.loseHealth(20)
+input.quickTimeEvent(10, 20, "Treasury")
+
+module.exports = {
+    mainCharacter: mainCharacter
+}
