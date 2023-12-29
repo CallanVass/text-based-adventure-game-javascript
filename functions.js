@@ -105,7 +105,7 @@ function chanceOfSuccess(percentage) {
     }
 }
 
-function quickTimeEvent(timeLimit, healthLost, room) {
+function quickTimeEvent(character, timeLimit, healthLost, room) {
     let enemyKilled = false
     quickTimePromptList = ["Drain them dry!",
                         "Knock them unconscious!"]
@@ -120,9 +120,9 @@ function quickTimeEvent(timeLimit, healthLost, room) {
             quickUserInput1 = prompt(">>> ")
             while (quickUserInput1 === "1") {
                 console.log("You feed, throwing the body aside like a wet blanket!")
-                main.mainCharacter.addBloodGlut(10)
+                character.addBloodGlut(10)
                 enemyKilled = true
-                guardKilledCounter += 1
+                globals.guardKilledCounter += 1
                 break
             }
             while (quickUserInput1 === "2") {
@@ -132,14 +132,15 @@ function quickTimeEvent(timeLimit, healthLost, room) {
             }
         }
         if (quickUserInput === "" && timePassed > timeLimit) {
-            // main.mainCharacter.loseHealth(healthLost)
-            checkCharacterHealth(main.mainCharacter)
+            character.loseHealth(healthLost)
+            checkCharacterHealth(character)
         }
     }
 }
 
 
 module.exports = {
+    prompt: prompt,
     appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,

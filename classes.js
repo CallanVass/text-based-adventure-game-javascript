@@ -30,12 +30,12 @@ class Character {
     }
     addBloodGlut(amount) {
         this.bloodglut = this.bloodglut + amount
-        let increase = console.log(`Blood glut has been increased by ${amount}`)
-        if (this.bloodglut > 100) {
+        let increase = `Blood glut has been increased by ${amount}!`
+        if (this.bloodglut >= 100) {
             this.bloodglut = 100
         }
         if (this.bloodglut <= 20) {
-            console.log(`${increase} \n Dark desires writhe within you!`)
+            console.log(`${increase} \nDark desires writhe within you!`)
         } else if (this.bloodglut > 20 && this.bloodglut <= 50) {
             console.log(`${increase} \n You grow stronger and an almost irresistable desire for blood awakens!`)
         } else if (this.bloodglut > 50 && this.bloodglut <= 65) {

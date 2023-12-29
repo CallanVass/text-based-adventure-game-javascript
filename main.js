@@ -2,7 +2,7 @@ const classes = require('./classes')
 const variables = require('./globalVariables')
 const prompts = require('./prompts')
 const functions = require('./functions')
-const prompt = require('prompt-sync')()
+// const prompt = require('prompt-sync')()
 
 
 const mainCharacter = new classes.Character("Dartha")
@@ -36,14 +36,16 @@ const mainCharacter = new classes.Character("Dartha")
 // input.options(prompt.cellRoomPromptList11, "Cell")
 
 
-mainCharacter.loseHealth(100)
-// input.quickTimeEvent(10, 20, "Treasury")
+// Some operation you want to measure the duration of
+
+
+// mainCharacter.loseHealth(100)
+functions.quickTimeEvent(mainCharacter, 1000, 20, "Treasury")
 // characterHealth = mainCharacter.health
 // console.log(characterHealth)
 // console.log(mainCharacter)
-functions.checkCharacterHealth(mainCharacter)
+// functions.checkCharacterHealth(mainCharacter)
 // console.log(mainCharacter.classes.displayStats())
-
 
 
 module.exports = {
