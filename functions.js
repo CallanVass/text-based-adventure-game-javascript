@@ -19,7 +19,7 @@ function appendNotebook() {
 // Append Notebook 
 function canWrite(prompt) {
     if (mainCharacterIsVampire.inv.hasItem("Bone Pen")) {
-        if (prompt === "Write" || prompt === "Write") {
+        if (prompt === "Write" || prompt === "write") {
             appendNotebook()
         } else {
 
@@ -44,12 +44,16 @@ function displayStats(character) {
     return
 }
 
-function checkCharacterHealth(character) {
-    if (character.health <= 0) {
+function checkCharacterHealth() {
+    health = main.mainCharacter.getHealth()
+    if (health <= 0) {
         asciiEndings.youDied()
         askIfPlayAgain()
     }
 }
+
+
+console.log(main.mainCharacter)
 
 function askIfPlayAgain() {
     while (true) {
@@ -130,8 +134,8 @@ function quickTimeEvent(timeLimit, healthLost, room) {
             }
         }
         if (quickUserInput === "" && timePassed > timeLimit) {
-            main.mainCharacter.loseHealth(healthLost)
-            checkCharacterHealth()
+            // main.mainCharacter.loseHealth(healthLost)
+            checkCharacterHealth(main.mainCharacter)
         }
     }
 }

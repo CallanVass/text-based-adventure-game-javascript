@@ -8,6 +8,7 @@ const mainCharacter = new classes.Character("Dartha")
 
 
 
+
 // function useNumber() {
 //     let prompt = input("Enter your number: ")
 //     if (prompt === "1") {
@@ -34,8 +35,13 @@ const mainCharacter = new classes.Character("Dartha")
 // input.options(prompt.cellRoomPromptList11, "Cell")
 
 
-mainCharacter.loseHealth(20)
-input.quickTimeEvent(10, 20, "Treasury")
+// mainCharacter.loseHealth(20)
+// input.quickTimeEvent(10, 20, "Treasury")
+// characterHealth = mainCharacter.health
+// console.log(characterHealth)
+// input.checkCharacterHealth()
+
+
 
 module.exports = {
     mainCharacter: mainCharacter

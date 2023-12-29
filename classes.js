@@ -9,6 +9,10 @@ class Character {
         this.bloodglut = 0
         this.inv = new Inventory()
     }
+    checkHealth() {
+        health = this.health
+        return health
+    }
     checkStats() {
         console.log(`Health: ${this.health}/100 \nBloodglut: ${this.bloodglut} \nInventory: ${this.inv.getItems()}`)
     }
