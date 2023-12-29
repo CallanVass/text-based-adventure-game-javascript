@@ -2,6 +2,7 @@ const fs = require('fs')
 const input = require('./functions')
 
 
+
 class Character {
     constructor(name) {
         this.name = name

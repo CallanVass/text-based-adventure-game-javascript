@@ -44,19 +44,17 @@ function displayStats(character) {
     return
 }
 
-function checkCharacterHealth() {
-    health = main.mainCharacter.getHealth()
+function checkCharacterHealth(character) {
+    health = character.health
     if (health <= 0) {
-        asciiEndings.youDied()
         askIfPlayAgain()
     }
 }
 
 
-console.log(main.mainCharacter)
-
 function askIfPlayAgain() {
     while (true) {
+        asciiEndings.youDied()
         console.log("Would you like to play again?")
         options(endPromptList, "Death Screen")
         endUserInput = prompt(">>> ")
@@ -74,7 +72,7 @@ function askIfPlayAgain() {
 function restartProgram() {
     const child = spawn(process.argv[0], process.argv.slice(1), {
       detached: true,
-      stdio: 'inherit',
+      stdio: 'ignore',
     })
     child.unref() // Unreferences the child process, allowing the original process to exit
   }
@@ -142,7 +140,6 @@ function quickTimeEvent(timeLimit, healthLost, room) {
 
 
 module.exports = {
-    prompt: prompt,
     appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,
