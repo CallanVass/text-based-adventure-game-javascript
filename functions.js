@@ -1,12 +1,19 @@
 const globals = require('./globalVariables')
 const classes = require('./classes')
 const main = require('./main')
-const asciiEndings = require('./asciiAndEndings')
+const asciiEndings = require('./texts')
 const { endPromptList } = require('./prompts')
 const { spawn } = require('child_process')
 
 // Allows us to call prompt in place of input()
 const prompt = require('prompt-sync')()
+
+// Sleep function 
+function sleep(ms) {
+    const end = Date.now() + ms
+    while (Date.now() < end) {
+    }
+  }
 
 // Append Notebook
 function appendNotebook() {
@@ -30,7 +37,7 @@ function canWrite(prompt) {
 // List of options for selection
 function options(optionsList, room) {
     console.log(`You are currently in: ${room}`)
-    
+
     optionsList.forEach((value, index) => {
         console.log(`Option ${index + 1}: ${value}`)
     })
@@ -71,11 +78,11 @@ function askIfPlayAgain() {
 
 function restartProgram() {
     const child = spawn(process.argv[0], process.argv.slice(1), {
-      detached: true,
-      stdio: 'ignore',
+        detached: true,
+        stdio: 'ignore',
     })
     child.unref() // Unreferences the child process, allowing the original process to exit
-  }
+}
 
 function chanceOfSuccess(percentage) {
     const randomNums = Array.from({ length: 1 }, () => Math.floor(Math.random() * 10) + 1)
@@ -108,7 +115,7 @@ function chanceOfSuccess(percentage) {
 function quickTimeEvent(character, timeLimit, healthLost, room) {
     let enemyKilled = false
     quickTimePromptList = ["Drain them dry!",
-                        "Knock them unconscious!"]
+        "Knock them unconscious!"]
     while (enemyKilled === false) {
         const start = performance.now()
         let quickUserInput = prompt("Quickly, press Enter! ")
@@ -138,9 +145,78 @@ function quickTimeEvent(character, timeLimit, healthLost, room) {
     }
 }
 
+function fightWithDracula(character, timeLimit, healthLost, enemy) {
+    const start = performance.now()
+    quickUserInput = prompt("Quickly press Enter! ")
+    const end = performance.now()
+    let timePassed = end = start
+    attackCounter++
+    while (attackCounter === 1) {
+        if (quickUserInput === "" && timePassed < timeLimit) {
+            console.log("You dodge her feral claws and throw back an attack of your own, catching her unaware")
+            enemy.draculaLoseHealth(20)
+            break
+        } else {
+            console.log("It slashes you across the chest, drawing thick blood to the surface.")
+            character.lostHealth(healthLost)
+            checkCharacterHealth(character)
+            break
+        }
+    }
+    while (attackCounter === 2) {
+        if (quickUserInput === "" && timePassed < timeLimit) {
+            console.log("You catch the attack, slashing her across the throat with claws of your own.")
+            enemy.draculaLoseHealth(20)
+            break
+        } else {
+            console.log("The attack slams you into a wall. You bounce back, coughing up blood.")
+            character.lostHealth(healthLost)
+            checkCharacterHealth(character)
+            break
+        }
+    }
+    while (attackCounter === 3) {
+        if (quickUserInput === "" && timePassed < timeLimit) {
+            console.log("She dives left, but you catch her attack just before it lands, rerouting the momentum.")
+            enemy.draculaLoseHealth(20)
+            break
+        } else {
+            console.log("Her attack circumnavigates your defence, piercing your ribs and puncturing a lung.")
+            character.lostHealth(healthLost)
+            checkCharacterHealth(character)
+            break
+        }
+    }
+    while (attackCounter === 4) {
+        if (quickUserInput === "" && timePassed < timeLimit) {
+            console.log("You're too quick, and catch her hand just before it smashes into your jaw.")
+            enemy.draculaLoseHealth(20)
+            break
+        } else {
+            console.log("Her hand cracks you in the jaw. You turn back, dazed.")
+            character.lostHealth(healthLost)
+            checkCharacterHealth(character)
+            break
+        }
+    }
+    while (attackCounter === 5) {
+        if (quickUserInput === "" && timePassed < timeLimit) {
+            console.log("You're too quick, and catch her hand just before it smashes into your jaw.")
+            enemy.draculaLoseHealth(20)
+            break
+        } else {
+            console.log("Her hand cracks you in the jaw. You turn back, dazed.")
+            character.lostHealth(healthLost)
+            checkCharacterHealth(character)
+            break
+        }
+    }
+}
+
 
 module.exports = {
     prompt: prompt,
+    sleep: sleep,
     appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,
@@ -149,6 +225,7 @@ module.exports = {
     restartProgram: restartProgram,
     checkCharacterHealth: checkCharacterHealth,
     chanceOfSuccess: chanceOfSuccess,
-    quickTimeEvent: quickTimeEvent
+    quickTimeEvent: quickTimeEvent,
+    fightWithDracula: fightWithDracula
 }
 
