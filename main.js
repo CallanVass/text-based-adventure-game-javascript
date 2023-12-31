@@ -8,6 +8,7 @@ const texts = require('./texts')
 
 const mainCharacter = new classes.Character("Dartha")
 const dracula = new classes.Character("Dracula")
+const notebook = new classes.Notebook()
 // function useNumber() {
 //     let prompt = input("Enter your number: ")
 //     if (prompt === "1") {
@@ -40,9 +41,9 @@ const dracula = new classes.Character("Dracula")
 // console.log(mainCharacter.classes.displayStats())
 
 
-texts.draculasCastle()
-texts.intro()
-
+functions.draculasCastle()
+// texts.intro()
+functions.selfBludgeonEnding(notebook)
 
 module.exports = {
     // mainCharacter: mainCharacter

@@ -92,6 +92,8 @@ const draculaPromptList3 = ["Exit the room."]
 const endPromptList = ["Yes",
                    "No"]
 
+// These are here to prevent circular imports 
+
 module.exports = {
     cellPromptList11: cellPromptList11,
     cellPromptList12: cellPromptList12,
