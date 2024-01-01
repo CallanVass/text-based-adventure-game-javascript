@@ -27,7 +27,6 @@ const notebook = new classes.Notebook()
 // functions.checkCharacterHealth(mainCharacter)
 // console.log(mainCharacter.classes.displayStats())
 
-
 functions.draculasCastle()
 functions.intro()
 
@@ -131,11 +130,12 @@ while (true) {
     // Cell Option 5
     while (userInput === "5") {
         let exitCellRoom = false
+        // console.log(mainCharacter.inv.hasItem("Bone Key"))
         if (variables.cellDoorOpen === true) {
-            console.log("You step through the opened cell door.")
+            console.log("You step through the opened door")
             functions.sleep(1000)
-        } else if (mainCharacter.inv.hasItem("Bone Key")) {
-            cellDoorOpen = true
+        } else if (mainCharacter.inv.hasItem("Bone Key") === true) {
+            variables.cellDoorOpen = true
             console.log("You jam the bone key into the cell door keyhole, breaking it but snapping the lock open at ")
             functions.sleep(300)
             console.log("the same time. The door slides wide open and you step through into a hallway.")
@@ -159,11 +159,23 @@ while (true) {
             break
             }
         }
-    }
+        // Cell Room/Jail Logic
+        while (variables.cellDoorOpen === true && variables.exitCellRoom === false) {
+            functions.displayStats()
+            if (variables.armouryEntered === false) {
+                functions.options(prompts.cellRoomPromptList11, "Jail")
+            } else {
+                functions.options(prompts.cellRoomPromptList12, "Jail")
+            }
+            cellRoomUserInput = functions.prompt()
+        }
+     
+        
+
 
 
 }
-
+}
 
 module.exports = {
     // mainCharacter: mainCharacter

@@ -74,7 +74,7 @@ class Inventory {
         return this.items.join(', ')
     }
     hasItem(name) {
-        return name in this.items
+        return this.items.includes(name)
     }
 
 }
