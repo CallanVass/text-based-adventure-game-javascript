@@ -1,5 +1,7 @@
 const globals = require('./globalVariables')
 const prompts = require('./prompts')
+const main = require('./main')
+const { blue, green, red, bold, yellow, black } = require('colorette')
 const { spawn } = require('child_process')
 
 // Allows us to call prompt in place of input()
@@ -21,8 +23,8 @@ function appendNotebook() {
 }
 
 // Append Notebook 
-function canWrite(prompt) {
-    if (mainCharacterIsVampire.inv.hasItem("Bone Pen")) {
+function canWrite(prompt, character) {
+    if (character.inv.hasItem("Bone Pen")) {
         if (prompt === "Write" || prompt === "write") {
             appendNotebook()
         } else {
@@ -243,15 +245,15 @@ function draculasCastle() {
 // Intro
 function intro() {
     console.log("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin.")
-    sleep(2000)
+    // sleep(2000)
     console.log("Tap...")
-    sleep(1500)
+    // sleep(1500)
     console.log("Tap...")
-    sleep(1500)
+    // sleep(1500)
     console.log("Tap...")
-    sleep(1500)
+    // sleep(1500)
     console.log("The moans of distant prisoners fill the halls. In the corner is a pile of bones. Past prisoners.")
-    sleep(1500)
+    // sleep(1500)
     console.log("The bite marks on your body are from Dracula. You're a blood slave. Something's different, though.")
     sleep(300)
     console.log("Your bite marks are healing, and the strength in your limbs wills you to fight back.")

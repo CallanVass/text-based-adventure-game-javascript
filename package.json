@@ -11,6 +11,7 @@
         "url": "https://github.com/heapwolf/prompt-sync.git"
     },
     "dependencies": {
+        "colorette": "^2.0.20",
         "prompt-sync": "^4.2.0"
     }
 }

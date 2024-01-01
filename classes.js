@@ -1,5 +1,6 @@
 const fs = require('fs')
 const input = require('./functions')
+const { blue, green, red, bold, yellow, black } = require('colorette')
 
 
 class Character {
@@ -14,7 +15,9 @@ class Character {
         return health
     }
     checkStats() {
-        console.log(`Health: ${this.health}/100 \nBloodglut: ${this.bloodglut} \nInventory: ${this.inv.getItems()}`)
+        console.log(green(`Health: ${this.health}/100`))
+        console.log(red(`Bloodglut: ${this.bloodglut}/100`))
+        console.log(yellow(`Inventory: ${this.inv.getItems()}`))
     }
     checkDraculaStats() {
         console.log(`Dracula's Health: ${this.health}/100`)
