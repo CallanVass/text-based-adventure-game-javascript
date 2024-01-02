@@ -1,6 +1,6 @@
 const globals = require('./globalVariables')
 const prompts = require('./prompts')
-const main = require('./main')
+const classes = require('./classes')
 const { blue, green, red, bold, yellow, black } = require('colorette')
 const { spawn } = require('child_process')
 
@@ -15,8 +15,7 @@ function sleep(ms) {
   }
 
 // Append Notebook
-function appendNotebook() {
-    const notebook = new Notebook()
+function appendNotebook(notebook) {
     notebook.readNotebook()
     notebook.appendNotebook()
     return
@@ -24,11 +23,11 @@ function appendNotebook() {
 
 // Append Notebook 
 function canWrite(prompt, character) {
-    if (character.inv.hasItem("Bone Pen")) {
+    if (character.inv.hasItem("Bone Pen") === true) {
         if (prompt === "Write" || prompt === "write") {
             appendNotebook()
         } else {
-
+            // Left Empty For No Result
         }
     }
 }
