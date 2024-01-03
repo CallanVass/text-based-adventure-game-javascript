@@ -178,7 +178,7 @@ while (true) {
                     console.log("you're able to drink your fill.")
                     functions.sleep(300)
                     mainCharacter.addBloodGlut(30)
-                    servantKilled = true
+                    variables.servantKilled = true
                     break
                 } else if (variables.servantUnconscious === true) {
                     console.log("A change of heart, eh?")
@@ -191,7 +191,7 @@ while (true) {
                     servantKilled = true
                     break
                 } else {
-                    console.log("He can't get any dead-er than he is.")
+                    console.log("He can't get any dead-er than he already is.")
                     functions.sleep(2000)
                     break
                 }
@@ -202,7 +202,7 @@ while (true) {
                 functions.options(prompts.treasuryPromptList12, "Treasury")
                 treasuryRoomUserInput1 = functions.prompt(">>> ")
                 functions.canWrite(treasuryRoomUserInput1, mainCharacter)
-                while (treasuryfunctions.sleepRoomUserInput1 === "1") {
+                while (treasuryRoomUserInput1 === "1") {
                     console.log("Your teeth sink straight through the metal. Yep, that's real gold alright.")
                     break
                 }
@@ -232,6 +232,7 @@ while (true) {
                 } else if (variables.servantKilled === true) {
                     console.log("You've just killed the man. Doesn't get much more 'unconscious' than that, does it?")
                     functions.sleep(2500)
+
                     break
                 } else {
                     console.log("He's already unconscious. Give the man a break.")
@@ -248,12 +249,13 @@ while (true) {
                     console.log("You approach the door, which is mostly-obscured by piles of coins.")
                     functions.displayStats(mainCharacter)
                     if (variables.tunnelDoorOpened === true) {
-                        functions.options(prompts.treasurypromptList131, "Treasury")
+                        functions.options(prompts.treasuryPromptList131, "Treasury")
                     } else {
-                        functions.options(prompts.treasurypromptList13, "Treasury")
-                        treasuryRoomInput2 = functions.prompt(">>> ")
-                        functions.canWrite(treasuryRoomInput2)
+                        functions.options(prompts.treasuryPromptList13, "Treasury")
+                    }
                     // The line below may need to go below the else statement
+                    treasuryRoomUserInput2 = functions.prompt(">>> ")
+                    functions.canWrite(treasuryRoomUserInput2, mainCharacter)
                     while (treasuryRoomUserInput2 === "1") {
                         if (variables.digCounter >= 3) {
                             variables.tunnelDoorOpened = true
@@ -298,15 +300,109 @@ while (true) {
                                     break
                                 }
                             }
+                            while (tunnelUserInput2 === "2") {
+                                if (mainCharacter.bloodGlut >= 50) {
+                                    console.log("'Look at you - all gorged on blood. And now you want my help? I don't think so.'")
+                                    break
+                                }
+                                if (variables.askedRiddle === false) {
+                                    console.log("'Hmm, interesting proposition,' says the Ominous Spirit. 'I'll tell you what - ")
+                                    functions.sleep(300)
+                                    console.log("if you can answer my riddle, I'll let you go. Here it is: ")
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow I was before, and I will be again.'<>"))
+                                    functions.sleep(300)
+                                    console.log("What am I?'")
+                                    variables.askedRiddle = true
+                                } else {
+                                    console.log("'Back to make another guess? Come on then, let's hear it.'")
+                                    functions.sleep(300)
+                                    console.log("'Here's the riddle again, in case you've forgotten. You probably have:'")
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
+                                    functions.sleep(300)
+                                    console.log(ct.convert("<>yellow I was before, and I will be again.'<>"))
+                                    functions.sleep(300)
+                                    console.log("What am I?'")
+                                    functions.sleep(7000)
+                                }
+                                tunnelUserInput3 = functions.prompt(">>> ")
+                                functions.canWrite(tunnelUserInput3)
+                                if (tunnelUserInput3 === "Death" || tunnelUserInput3 === "death") {
+                                    functions.ominousSpiritRiddleEnding()
+                                } else {
+                                    console.log("Ha. Nice try, but you'll have to try harder.")
+                                    functions.sleep(2000)
+                                    break
+                                }
+                            }
+                            while (tunnelUserInput2 === "3") {
+                                if (variables.ominousSpiritStareCounter > 19) {
+                                    functions.ominousSpiritStareEnding()
+                                } else if (variables.ominousSpiritStareCounter < 5) {
+                                    console.log("The Ominous Spirit stares straight back at you, piercing your very soul. Something ")
+                                    functions.sleep(300)
+                                    console.log("inside you goes cold. You shiver.")
+                                    functions.sleep(2500)
+                                    variables.ominousSpiritStareCounter += 1
+                                    break
+                                } else if (variables.ominousSpiritStareCounter >= 5 && variables.ominousSpiritStareCounter < 10) {
+                                    console.log("'What?' the Ominous Spirit asks. 'Why are you staring?'")
+                                    functions.sleep(300)
+                                    console.log("You smile.")
+                                    functions.sleep(2500)
+                                    variables.ominousSpiritStareCounter += 1
+                                } else if (variables.ominousSpiritStareCounter >= 10 && variables.ominousSpiritStareCounter < 15) {
+                                    console.log("The Spirit appears to be losing his composition. You keep smiling.")
+                                    functions.sleep(2500)
+                                    ominous_spirit_stare_counter += 1
+                                    break
+                                } else if (variables.ominousSpiritStareCounter >= 15 && variables.ominousSpiritStareCounter < 19) {
+                                    console.log("He begins to sweat. Your smile widens.")
+                                    functions.sleep(2.5)
+                                    variables.ominousSpiritStareCounter += 1
+                                    break
+                                }
+                            }
+                                if (tunnelUserInput2 === "4") {
+                                    break
+                            }
+                            if (treasuryRoomUserInput3 === "2") {
+                                break
+                            }
                             }
                         }
+                    functions.chanceOfSuccess(2)
+                    if (variables.tunnelDoorOpened === false) {
+                        if (chanceOfSuccess === "Your attempt fails!") {
+                            variables.digCounter += 1
+                            console.log("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
+                            functions.quickTimeEvent(mainCharacter, 4000, 20, "Treasury")
+                            variables.treasuryGuardDead = true
+                        } else {
+                        console.log("You dig some of the coins away without being heard!")
+                        functions.sleep(2000)
+                        variables.digCounter += 1
+                        break
                     }
-                        
+                    } else {
+                        break
                     }
+
                     
+                    }  
                 }
             }
+            if (treasuryRoomUserInput === "5") {
+                break
+            } 
             }
         }
 }
-}
+    }

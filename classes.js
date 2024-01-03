@@ -66,9 +66,9 @@ class Inventory {
         let index = this.items.indexOf(name)
         if (index !== -1) {
             this.items.splice(index, 1)
+            console.log(`You have removed ${name}!`)
         }
-        this.items.push(name)
-        console.log(`You have picked up ${name}!`)
+        
     }
     getItems() {
         return this.items.join(', ')
