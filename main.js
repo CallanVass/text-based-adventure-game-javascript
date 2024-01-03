@@ -393,15 +393,153 @@ while (true) {
                     }
                     } else {
                         break
-                    }
-
-                    
                     }  
+                    }
+                    if (treasuryRoomUserInput2 === "2") {
+                        console.log("It reads: 'No bloodbag is to enter here until I've dealt with its occupant.'")
+                        console.log("Signed: Dracula")
+                        functions.sleep(1000)
+                    }
+                    if (treasuryRoomUserInput2 === "3") {
+                        break
+                    }
                 }
             }
             if (treasuryRoomUserInput === "5") {
                 break
             } 
+            }
+            while (cellRoomUserInput === "2") {
+                if (variables.prisonersFree === true) {
+                    console.log("You've already done that.")
+                    functions.sleep(1000)
+                    break
+                } else if (mainCharacter.inv.hasItem("Master Key")) {
+                    console.log("With Dracula's key, you free the prisoners!")
+                    functions.sleep(1000)
+                    variables.prisonersFree = true
+                } else if (mainCharacter.inv.hasItem("Master Key")) {
+                    console.log("You're resourceful, aren't you?")
+                    functions.sleep(300)
+                    console.log("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
+                    functions.sleep(300)
+                    console.log("The prisoners have been freed! They huddle around the main door, too scared to do anything else.")
+                    variables.prisonersFree = true
+                    break
+                } else if (mainCharacter.bloodglut < 50) {
+                    console.log("You try and bend the bars, but they won't give. If only you were stronger...")
+                    functions.sleep(2500)
+                    break
+                } else if (variables.prisonersFree === true) {
+                    console.log("They're already free.")
+                    functions.sleep(1500)
+                } else {
+                    console.log("Strength swells within you. With your newfound might, you snap the bars off their hinges. ")
+                    functions.sleep(300)
+                    console.log("The prisoners have been freed!")
+                    functions.sleep(300)
+                    variables.prisonersFree = true
+                    break  
+                }
+            }
+            // Armoury Logic
+            while (cellRoomUserInput === "3") {
+                if (mainCharacter.inv.hasItem("Gold Key")) {
+                    if (variables.armouryEntered === false) {
+                        console.log("You open the Armoury door to find 3 guards, all with plate armour and weapons. They drop their drinks and draw their swords.")
+                        functions.displayStats(mainCharacter)
+                        functions.options(prompts.armouryPromptList1, "Armoury")
+                        armouryUserInput1 = functions.prompt(">>> ")
+                        functions.canWrite(armouryUserInput1, mainCharacter)
+                        while (armouryUserInput1 === "1") {
+                            console.log("You lunge at the closest one, who raises his sword in defense. You dodge.")
+                            functions.sleep(3000)
+                            quickTimeEvent(mainCharacter, 2000, 20, "Armoury")
+                            console.log("Done with the first one, the other two charge you.")
+                            functions.displayStats(mainCharacter)
+                            functions.options(prompts.armouryPromptList2, "Armoury")
+                            armouryUserInput2 = functions.prompt(">>> ")
+                            functions.canWrite(armouryUserInput2, mainCharacter)
+                            if (armouryUserInput2 === "1") {
+                                console.log("You edge backwards, forcing them to face you one at a time.")
+                                quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
+                                functions.display_stats(mainCharacter)
+                                console.log("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
+                                functions.sleep(3000)
+                                quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
+                                functions.display_stats(mainCharacter)
+                                variables.armouryEntered = true
+                                break
+                            } else if (armouryUserInput2 === "2") {
+                                console.log("Blindly, you rush both of them and get attacked twice in a short period.")
+                                functions.sleep(2000)
+                                quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
+                                quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
+                                variables.armouryEntered = true
+                                break
+                            }
+                        }
+                    }
+                } else {
+                    console.log("You stand in the armoury, surveying the carnage you've caused.")
+                    functions.displayStats(mainCharacter)
+                    functions.options(armouryPromptList3, armoury)
+                    armouryUserInput3 = functions.prompt(">>> ")
+                    functions.canWrite(armouryUserInput3, mainCharacter)
+                    while (armouryUserInput3 === "1") {
+                        if (variables.draculaChambersEntered === false) {
+                            print("With a looming silence, you press forwards, inching the doors to Dracula's chamber open.")
+                            time.sleep(0.3)
+                            print("It's daytime, so you expect a sleeping figure hanging from the ceiling. You've never")
+                            time.sleep(0.3)
+                            print("been more incorrect.")
+                            time.sleep(0.3)
+                            print("Resting on a velvet throne is Dracula in a full set of engraved metal armour. In the")
+                            time.sleep(0.3)
+                            print("engravings you see a million deaths. A million lifetimes spent drinking blood. Dracula smiles,")
+                            time.sleep(0.3)
+                            print("her spectacularly white teeth sparkling between her frame of golden hair. She stands from her")
+                            time.sleep(0.3)
+                            print("throne and descends a couple steps.")
+                            time.sleep(0.3)
+                            print(ct.convert("<>magenta 'I can only presume you're here to kill me,'<> she says, her smirk growing wider."))
+                            display_stats()
+                            dracula_chambers_entered = True
+                        } else {
+                            functions.displayStats(mainCharacter)
+                        }
+                        if (variables.draculaKilled === true) {
+                            functions.options(prompts.draculaPromptList3, "Dracula's Chambers")
+                            draculaChambersUserInput5 = functions.prompt(">>> ")
+                            functions.canWrite(armouryUserInput3, mainCharacter)
+                            if (draculaChambersUserInput5 === "1") {
+                                break
+                            }
+                        }
+                        if (variables.servantKilled === true && variables.guardKilledCounter >= 1) {
+                            functions.options(prompts.draculaPromptList1, "Dracula's Chambers")
+                        } else {
+                            functions.options(prompts.draculaPromptList2, "Dracula's Chambers")
+                            
+                        }
+                        draculaChambersUserInput3 = functions.prompt(">>> ")
+                        functions.canWrite(draculaChambersUserInput3, mainCharacter)
+                        if (draculaChambersUserInput3 === "1") {
+                            print(ct.convert("<>magenta 'Do I really?'<> she asks. <>magenta 'People kill animals all the time. What's the difference?'<>"))
+                            time.sleep(0.3)
+                            print("'People aren't animals, and they aren't slaves either. They want to live,' you")
+                            time.sleep(0.3)
+                            print("remind her. Much good it will do.")
+                            time.sleep(0.3)
+                            print(ct.convert("Dracula's eyes take on a faint glow. <>magenta 'I've never seen an animal that wanted to die.<>"))
+                            time.sleep(0.3)
+                            print(ct.convert("<>magenta Yet here you are,'<> she whispers, breaking into a tinkling laugh so violent it rattles"))
+                            time.sleep(0.3)
+                            print("the plates of her armour.")
+                        }
+
+                    }
+                }
             }
         }
 }
