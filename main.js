@@ -310,11 +310,11 @@ while (true) {
                                     functions.sleep(300)
                                     console.log("if you can answer my riddle, I'll let you go. Here it is: ")
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
+                                    console.log(red("yellow 'I'm the timeless enigma, lurking somwhere between future and past."))
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
+                                    console.log(red("yellow To me, a sharpened pencil is closer than an unsharpened one."))
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow I was before, and I will be again.'<>"))
+                                    console.log(red("yellow I was before, and I will be again.'"))
                                     functions.sleep(300)
                                     console.log("What am I?'")
                                     variables.askedRiddle = true
@@ -323,11 +323,11 @@ while (true) {
                                     functions.sleep(300)
                                     console.log("'Here's the riddle again, in case you've forgotten. You probably have:'")
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow 'I'm the timeless enigma, lurking somwhere between future and past.<>"))
+                                    console.log(red("yellow 'I'm the timeless enigma, lurking somwhere between future and past."))
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow To me, a sharpened pencil is closer than an unsharpened one.<>"))
+                                    console.log(red("yellow To me, a sharpened pencil is closer than an unsharpened one."))
                                     functions.sleep(300)
-                                    console.log(ct.convert("<>yellow I was before, and I will be again.'<>"))
+                                    console.log(red("yellow I was before, and I will be again.'"))
                                     functions.sleep(300)
                                     console.log("What am I?'")
                                     functions.sleep(7000)
@@ -479,8 +479,7 @@ while (true) {
                                 break
                             }
                         }
-                    }
-                } else {
+                    } else {
                     console.log("You stand in the armoury, surveying the carnage you've caused.")
                     functions.displayStats(mainCharacter)
                     functions.options(armouryPromptList3, armoury)
@@ -488,23 +487,23 @@ while (true) {
                     functions.canWrite(armouryUserInput3, mainCharacter)
                     while (armouryUserInput3 === "1") {
                         if (variables.draculaChambersEntered === false) {
-                            print("With a looming silence, you press forwards, inching the doors to Dracula's chamber open.")
-                            time.sleep(0.3)
-                            print("It's daytime, so you expect a sleeping figure hanging from the ceiling. You've never")
-                            time.sleep(0.3)
-                            print("been more incorrect.")
-                            time.sleep(0.3)
-                            print("Resting on a velvet throne is Dracula in a full set of engraved metal armour. In the")
-                            time.sleep(0.3)
-                            print("engravings you see a million deaths. A million lifetimes spent drinking blood. Dracula smiles,")
-                            time.sleep(0.3)
-                            print("her spectacularly white teeth sparkling between her frame of golden hair. She stands from her")
-                            time.sleep(0.3)
-                            print("throne and descends a couple steps.")
-                            time.sleep(0.3)
-                            print(ct.convert("<>magenta 'I can only presume you're here to kill me,'<> she says, her smirk growing wider."))
-                            display_stats()
-                            dracula_chambers_entered = True
+                            console.log("With a looming silence, you press forwards, inching the doors to Dracula's chamber open.")
+                            functions.sleep(300)
+                            console.log("It's daytime, so you expect a sleeping figure hanging from the ceiling. You've never")
+                            functions.sleep(300)
+                            console.log("been more incorrect.")
+                            functions.sleep(300)
+                            console.log("Resting on a velvet throne is Dracula in a full set of engraved metal armour. In the")
+                            functions.sleep(300)
+                            console.log("engravings you see a million deaths. A million lifetimes spent drinking blood. Dracula smiles,")
+                            functions.sleep(300)
+                            console.log("her spectacularly white teeth sparkling between her frame of golden hair. She stands from her")
+                            functions.sleep(300)
+                            console.log("throne and descends a couple steps.")
+                            functions.sleep(300)
+                            console.log(red("'I can only presume you're here to kill me,' she says, her smirk growing wider."))
+                            functions.displayStats(mainCharacter)
+                            variables.draculaChambersEntered = true
                         } else {
                             functions.displayStats(mainCharacter)
                         }
@@ -525,22 +524,165 @@ while (true) {
                         draculaChambersUserInput3 = functions.prompt(">>> ")
                         functions.canWrite(draculaChambersUserInput3, mainCharacter)
                         if (draculaChambersUserInput3 === "1") {
-                            print(ct.convert("<>magenta 'Do I really?'<> she asks. <>magenta 'People kill animals all the time. What's the difference?'<>"))
-                            time.sleep(0.3)
-                            print("'People aren't animals, and they aren't slaves either. They want to live,' you")
-                            time.sleep(0.3)
-                            print("remind her. Much good it will do.")
-                            time.sleep(0.3)
-                            print(ct.convert("Dracula's eyes take on a faint glow. <>magenta 'I've never seen an animal that wanted to die.<>"))
-                            time.sleep(0.3)
-                            print(ct.convert("<>magenta Yet here you are,'<> she whispers, breaking into a tinkling laugh so violent it rattles"))
-                            time.sleep(0.3)
-                            print("the plates of her armour.")
+                            console.log(red("'Do I really?' she asks. 'People kill animals all the time. What's the difference?'"))
+                            functions.sleep(300)
+                            console.log("'People aren't animals, and they aren't slaves either. They want to live,' you")
+                            functions.sleep(300)
+                            console.log("remind her. Much good it will do.")
+                            functions.sleep(300)
+                            console.log(red("Dracula's eyes take on a faint glow. 'I've never seen an animal that wanted to die."))
+                            functions.sleep(300)
+                            console.log(red(" Yet here you are,' she whispers, breaking into a tinkling laugh so violent it rattles"))
+                            functions.sleep(300)
+                            console.log("the plates of her armour.")
                         }
-
+                        if (draculaChambersUserInput3 === "2") {
+                            console.log(red(" 'It's never enough. Not really. I suspect you're beginning to realise this seeing"))
+                            functions.sleep(300)
+                            console.log(red(" as how you're becoming exactly like me.'"))
+                        }
+                        if (draculaChambersUserInput3 === "3") {
+                            console.log(red(" 'Yes, you do display the explicit level of corruption that I've come to demand of my servants.'"))
+                            functions.sleep(300)
+                            console.log("'I'm not corrupt,' you point out.")
+                            functions.sleep(300)
+                            console.log("Dracula snorts, her small pale nose facing the floor as she giggles. What an odd sound.")
+                            functions.sleep(300)
+                            console.log(red("She leans in closer and whispers. 'Corruption is a matter of perspective.'"))
+                        }
+                        while (draculaChambersUserInput3 === "4") {
+                            console.log(red("'If you insist...'"))
+                            functions.sleep(1000)
+                            console.log(red("'Then so do I.'"))
+                            dracula.checkDraculaStats()
+                            functions.sleep(1000)
+                            console.log("In a blinding flash, she strikes out with her claws.")
+                            functions.sleep(3000)
+                            functions.fightWithDracula(mainCharacter, 800, 40, dracula)
+                            dracula.checkDraculaStats()
+                            functions.displayStats(mainCharacter)
+                            console.log(red("She backs up, eyes glued to you as she circles. 'You think that was quick?' she asks."))
+                            functions.sleep(300)
+                            console.log(red("'Then try this.'"))
+                            functions.sleep(300)
+                            console.log("A blinding attack comes for you.")
+                            functions.sleep(7000)
+                            functions.fightWithDracula(mainCharacter, 500, 40, dracula)
+                            dracula.checkDraculaStats()
+                            functions.displayStats(mainCharacter)
+                            console.log("She smiles and a spurt of blood jumps from her throat.")
+                            functions.sleep(300)
+                            console.log(red(" 'You're quick. Not quick enough, though.'"))
+                            functions.sleep(5000)
+                            functions.fightWithDracula(mainCharacter, 500, 40, dracula)
+                            dracula.checkDraculaStats()
+                            functions.displayStats(mainCharacter)
+                            console.log("As she crashes into her throne, a serious gasp exits her mouth.")
+                            functions.sleep(300)
+                            console.log("You press the advantage, leaping across the room and grabbing her by the throat")
+                            functions.sleep(300)
+                            console.log("With all your might, you smash her into the cobbled floor, sending fractures in")
+                            functions.sleep(300)
+                            console.log("every direction. ")
+                            functions.sleep(300)
+                            console.log("Like stray lightning, Dracula reaches for you.")
+                            functions.sleep(10000)
+                            fight_with_dracula(main_character, 0.3, 40)
+                            dracula.checkDraculaStats()
+                            functions.displayStats(mainCharacter)
+                            console.log("You raise your hand, ready to finish the monster once and for all.")
+                            functions.sleep(300)
+                            console.log(red(" 'Wait!' she shouts."))
+                            functions.sleep(300)
+                            console.log(red("You pause.  'You don't understand this,' she sputters.  'If you kill me,"))
+                            functions.sleep(300)
+                            console.log(red(" you'll never understand it. Spare me, and I'll show you things you've never"))
+                            functions.sleep(300)
+                            console.log(red(" imagined. Worlds - completely seperate from this one.'"))
+                            functions.sleep(7000)
+                            dracula.checkDraculaStats()
+                            functions.displayStats(mainCharacter)
+                            functions.options(prompts.draculaPromptList21, "Dracula's Chambers")
+                            draculaChambersUserInput4 = functions.prompt(">>> ")
+                            while (draculaChambersUserInput4 === "1") {
+                                console.log("'Sorry. Once a monster, always a monster.'")
+                                functions.sleep(300)
+                                console.log("You bring a clawed hand down, severing her head from her shoulders.")
+                                functions.sleep(300)
+                                console.log("Unable to stop yourself, you drink her blood.")
+                                functions.sleep(300)
+                                mainCharacter.addBloodGlut(30)
+                                functions.sleep(300)
+                                dracula.draculaLoseHealth(20)
+                                functions.sleep(300)
+                                dracula.checkDraculaStats()
+                                console.log("Finally... she's dead. You stand up, still shaking from the fight.")
+                                functions.sleep(5)
+                                mainCharacter.inv.addItem("Master Key")
+                                functions.sleep(2)
+                                variables.draculaKilled = true
+                                break
+                            }
+                            if (draculaChambersUserInput4 === "2") {
+                                functions.draculaSparedEnding()
+                            }
+                            break
+                        }
+                        if (draculaChambersUserInput3 === "5") {
+                            if (variables.draculaKilled === false) {
+                                console.log("There is no going back. One way or another, this ends now.")
+                                functions.sleep(2000)
+                            } else {
+                                break
+                            }
+                        }
                     }
+                    if (armouryUserInput3 === "2") {
+                        console.log("With thoughts of facing Dracula armed, you reach for their weapons and armour,")
+                        functions.sleep(300)
+                        console.log("only to find they're made of silver and hot to the touch.")
+                        functions.sleep(300)
+                        mainCharacter.loseHealth(5)
+                        functions.sleep(300)
+                        console.log("'Curse this affliction,' you murmur.")
+                        functions.sleep(300)
+                        checkCharacterHealth(mainCharacter)
+                    }
+                    if (armouryUserInput3 === "3") {
+                        break
+                    }
+                } 
+                } else {
+                    console.log("It appears you need some sort of metal key to do that. Maybe you can make one?")
+                    functions.sleep(2500)
+                    break
                 }
             }
-        }
-}
+            while (cellRoomUserInput === "4") {
+                if (mainCharacter.inv.hasItem("Master Key") === true && mainCharacter.bloodGlut <= 65) {
+                    functions.mainDoorEndingWithKey()
+                } else if (mainCharacter.bloodGlut < 65) {
+                    print("You need either the Master Key or the strength to brute force it.")
+                    time.sleep(2.5)
+                    break
+                } else if (mainCharacter.bloodGlut > 99) {
+                    functions.mainDoorFullBloodGlutEnding()
+                } else if (mainCharacter.bloodGlut > 65 && mainCharacter.bloodGlut < 99) {
+                    functions.mainDoorEndingWithoutKey()
+                }
+            }
+            while (cellRoomUserInput === "5") {
+                console.log("You step closer, reading the carving plainly with your improved vision.")
+                functions.sleep(300)
+                print(yellow("'I'll tear spleens, defeat everything and this hell to get what I want.'"))
+                break
+            }
+            if (cellRoomUserInput === "6") {
+                variables.exitCellRoom === true
+            }
     }
+    if (variables.exitCellRoom === true) {
+        break
+    }
+}
+}
