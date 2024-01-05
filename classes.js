@@ -39,15 +39,15 @@ class Character {
         if (this.bloodglut <= 20) {
             console.log(`${increase} \nDark desires writhe within you!`)
         } else if (this.bloodglut > 20 && this.bloodglut <= 50) {
-            console.log(`${increase} \n You grow stronger and an almost irresistable desire for blood awakens!`)
+            console.log(`${increase} \nYou grow stronger and an almost irresistable desire for blood awakens!`)
         } else if (this.bloodglut > 50 && this.bloodglut <= 65) {
-            console.log(`${increase} \n You're turning into an unkillable creature of nightmares!`)
+            console.log(`${increase} \nYou're turning into an unkillable creature of nightmares!`)
         } else if (this.bloodglut > 65 && this.bloodglut <= 80) {
-            console.log(`${increase} \n You swelter with violent power. Soon you'll be lost to your human form forever!`)
+            console.log(`${increase} \nYou swelter with violent power. Soon you'll be lost to your human form forever!`)
         } else if (this.bloodglut > 80 && this.bloodglut <= 99) {
             console.log(`${increase} \nYour humanity sinks deeper with every kill, drowned in the blood of your enemies! One more kill and you'll be lost to the dark forces of vampirism!`)
         } else {
-            console.log(`${increase} \n Darkness shrouds around you like torrent of black fire, hailing you as its new king!`)
+            console.log(`${increase} \nDarkness shrouds around you like torrent of black fire, hailing you as its new king!`)
         }
     }
 }

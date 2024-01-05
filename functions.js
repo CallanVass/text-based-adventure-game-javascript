@@ -1,6 +1,5 @@
 const globals = require('./globalVariables')
 const prompts = require('./prompts')
-const classes = require('./classes')
 const { blue, green, red, bold, yellow, black } = require('colorette')
 const { spawn } = require('child_process')
 
@@ -47,6 +46,22 @@ function askIfPlayAgain() {
         youDied()
         console.log("Would you like to play again?")
         options(prompts.endPromptList, "Death Screen")
+        endUserInput = prompt(">>> ")
+        if (endUserInput === "1") {
+            restartProgram()
+        } else if (endUserInput === "2") {
+            console.log("Thanks for playing!")
+            process.exit()
+        } else {
+            console.log("Please enter a valid value.")
+        }
+    }
+}
+
+function askIfPlayAgainNotDead() {
+    while (true) {
+        console.log("Would you like to play again?")
+        options(prompts.endPromptList, "A state of indecision.")
         endUserInput = prompt(">>> ")
         if (endUserInput === "1") {
             restartProgram()
@@ -274,7 +289,7 @@ function selfBludgeonEnding(notebook) {
     console.log("doofus.")
     sleep(11000)
     notebook.resetNotebook()
-    askIfPlayAgain()
+    askIfPlayAgainNotDead()
 }
 
 function ominousSpiritStareEnding(notebook) {
@@ -292,7 +307,7 @@ function ominousSpiritStareEnding(notebook) {
         console.log("You're free.")
         sleep(15000)
         notebook.resetNotebook()
-        askIfPlayAgain()
+        askIfPlayAgainNotDead()
     } else {
         console.log("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
         sleep(300)
@@ -311,13 +326,13 @@ function ominousSpiritStareEnding(notebook) {
         console.log("Your heart unclenches.")
         sleep(15000)
         notebook.reset_notebook()
-        askIfPlayAgain()
+        askIfPlayAgainNotDead()
     }
 }
 
 
-function ominousSpiritRiddleEnding(notebook) {
-    if (prisoners_free === false) {
+function ominousSpiritRiddleEnding(notebook, character) {
+    if (globals.prisonersFree === false) {
         console.log("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as ")
         sleep(300)
         console.log("though trying to figure out how you did it. After some time, he snaps out of it and his ")
@@ -328,7 +343,7 @@ function ominousSpiritRiddleEnding(notebook) {
         sleep(300)
         console.log("I give you this: ")
         sleep(300)
-        main_character.inv.add_item("Spirit's Blessing")
+        character.inv.addItem("Spirit's Blessing")
         sleep(300)
         console.log("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he  ")
         sleep(300)
@@ -341,7 +356,7 @@ function ominousSpiritRiddleEnding(notebook) {
         console.log("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         sleep(18000)
         notebook.resetNotebook()
-        functions.askIfPlayAgain
+        askIfPlayAgainNotDead()
     } else {
         console.log("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as ")
         sleep(300)
@@ -353,7 +368,7 @@ function ominousSpiritRiddleEnding(notebook) {
         sleep(300)
         console.log("I give you this: ")
         sleep(300)
-        main_character.inv.add_item("Spirit's Blessing")
+        main_character.inv.addItem(yellow("Spirit's Blessing"))
         sleep(300)
         console.log("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he  ")
         sleep(300)
@@ -372,33 +387,33 @@ function ominousSpiritRiddleEnding(notebook) {
         console.log("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         sleep(20000)
         notebook.resetNotebook()
-        askIfPlayAgain()
+        askIfPlayAgainNotDead()
     }
 
 }
 
 function mainDoorFullBloodGlutEnding(notebook) {
-    if (prisoners_free === false) {
+    if (prisonersFree === false) {
         console.log("First, you free the prisoners with your immense strength.")
         sleep(300)
-    console.log("You look back at the wretched place that contained you for so long, wondering if setting ")
-    sleep(300)
-    console.log("it ablaze would be too much. It's not worth it, you think. There's prey to hunt, and the")
-    sleep(300)
-    console.log("darkness calls you forward. You throw an impossbily-strong kick, ripping the large wooden")
-    sleep(300)
-    console.log("doors off their hinges and stepping outside. Your skin boils in the sunlight as the prisoners")
-    sleep(300)
-    console.log("run past you, fear-struck by your smoking form. You have become everything you hate.")
-    sleep(300)
-    console.log("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
-    sleep(18000)
-    notebook.resetNotebook()
-    askIfPlayAgain()
+        console.log("You look back at the wretched place that contained you for so long, wondering if setting ")
+        sleep(300)
+        console.log("it ablaze would be too much. It's not worth it, you think. There's prey to hunt, and the")
+        sleep(300)
+        console.log("darkness calls you forward. You throw an impossbily-strong kick, ripping the large wooden")
+        sleep(300)
+        console.log("doors off their hinges and stepping outside. Your skin boils in the sunlight as the prisoners")
+        sleep(300)
+        console.log("run past you, fear-struck by your smoking form. You have become everything you hate.")
+        sleep(300)
+        console.log("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
+        sleep(18000)
+        notebook.resetNotebook()
+        askIfPlayAgainNotDead()
     }
 }
 
-function mainDoorEndingWithKey() {
+function mainDoorEndingWithKey(notebook) {
     console.log("You look back at the wretched place that contained you for so long, wondering if setting it")
     sleep(300)
     console.log("ablaze would be too much. It's not worth it, you think. Maybe one day, someone will live ")
@@ -414,10 +429,10 @@ function mainDoorEndingWithKey() {
     console.log("You smile. It's finally over.")
     sleep(18000)
     notebook.reset_notebook()
-    askIfPlayAgain()
+    askIfPlayAgainNotDead()
 }
 
-function mainDoorEndingWithoutKey() {
+function mainDoorEndingWithoutKey(notebook) {
     console.log("You look back at the wretched place that contained you for so long, wondering if setting it")
     sleep(300)
     console.log("ablaze would be too much.It's not worth it, you think. Maybe one day, someone will live here.")
@@ -433,10 +448,10 @@ function mainDoorEndingWithoutKey() {
     console.log("You smile. It's finally over.")
     sleep(18000)
     notebook.reset_notebook()
-    askIfPlayAgain()
+    askIfPlayAgainNotDead()
 }
 
-function draculaSparedEnding() {
+function draculaSparedEnding(notebook) {
     console.log("'You're right,' you say, giving into your own darkness.")
     sleep(300)
     console.log("Slowly, you remove your hand from her neck and stand up.")
@@ -452,7 +467,7 @@ function draculaSparedEnding() {
     console.log("You've become a prince of darkness.")
     sleep(18000)
     notebook.reset_notebook()
-    askIfPlayAgain()
+    askIfPlayAgainNotDead()
 }
 
 module.exports = {

@@ -20,7 +20,7 @@ while (true) {
     functions.displayStats(mainCharacter)
     functions.options(prompts.cellPromptList11, "Cell")
     userInput = functions.prompt(">>> ")
-    functions.canWrite(notebook, mainCharacter)
+    functions.canWrite(userInput, mainCharacter)
     // Cell Option 1
     while (userInput === "1") {
         if (mainCharacter.bloodglut < 20) {
@@ -165,7 +165,7 @@ while (true) {
                     treasuryRoomUserInput = functions.prompt(">>> ")
                     functions.canWrite(treasuryRoomUserInput, mainCharacter)
                 } else {
-                    console.log("You're standing in the Treasury.")
+                    functions.displayStats(mainCharacter)
                     functions.options(prompts.treasuryPromptList11, "Treasury")
                     treasuryRoomUserInput = functions.prompt(">>> ")
                     functions.canWrite(treasuryRoomUserInput, mainCharacter)
@@ -263,8 +263,9 @@ while (true) {
                             functions.displayStats(mainCharacter)
                             functions.options(prompts.tunnelPromptList1, "Tunnels")
                             treasuryRoomUserInput3 = functions.prompt(">>> ")
-                            functions.canWrite(treasuryRoomUserInput3)
+                            functions.canWrite(treasuryRoomUserInput3, mainCharacter)
                             while (treasuryRoomUserInput3 === "1") {
+                                if (variables.tunnelTravelledDown === false) {
                                 console.log(yellow("You venture down the tunnel, closing the distance between you and the light."))
                                 functions.sleep(300)
                                 console.log("As you near, you realise it's not a light, but two lights. You go to turn back, but ")
@@ -275,6 +276,7 @@ while (true) {
                                 functions.sleep(300)
                                 console.log("before a tunnel.")
                                 variables.tunnelTravelledDown = true
+                                }
                             functions.displayStats(mainCharacter)
                             if (variables.askedRiddle === false) {
                                 functions.options(prompts.tunnelPromptList2, "Tunnels")
@@ -282,7 +284,7 @@ while (true) {
                                 functions.options(prompts.tunnelPromptList21, "Tunnels")
                             }
                             tunnelUserInput2 = functions.prompt(">>> ")
-                            functions.canWrite(tunnerUserInput2)
+                            functions.canWrite(tunnelUserInput2, mainCharacter)
                             // Tunnel Logic
                             while (tunnelUserInput2 === "1") {
                                 if (variables.bowedBeforeOminousSpirit === false) {
@@ -310,11 +312,11 @@ while (true) {
                                     functions.sleep(300)
                                     console.log("if you can answer my riddle, I'll let you go. Here it is: ")
                                     functions.sleep(300)
-                                    console.log(red("yellow 'I'm the timeless enigma, lurking somwhere between future and past."))
+                                    console.log(yellow("'I'm the timeless enigma, lurking somwhere between future and past."))
                                     functions.sleep(300)
-                                    console.log(red("yellow To me, a sharpened pencil is closer than an unsharpened one."))
+                                    console.log(yellow("To me, a sharpened pencil is closer than an unsharpened one."))
                                     functions.sleep(300)
-                                    console.log(red("yellow I was before, and I will be again.'"))
+                                    console.log(yellow("I was before, and I will be again.'"))
                                     functions.sleep(300)
                                     console.log("What am I?'")
                                     variables.askedRiddle = true
@@ -323,19 +325,19 @@ while (true) {
                                     functions.sleep(300)
                                     console.log("'Here's the riddle again, in case you've forgotten. You probably have:'")
                                     functions.sleep(300)
-                                    console.log(red("yellow 'I'm the timeless enigma, lurking somwhere between future and past."))
+                                    console.log(yellow("'I'm the timeless enigma, lurking somwhere between future and past."))
                                     functions.sleep(300)
-                                    console.log(red("yellow To me, a sharpened pencil is closer than an unsharpened one."))
+                                    console.log(yellow("To me, a sharpened pencil is closer than an unsharpened one."))
                                     functions.sleep(300)
-                                    console.log(red("yellow I was before, and I will be again.'"))
+                                    console.log(yellow("I was before, and I will be again.'"))
                                     functions.sleep(300)
                                     console.log("What am I?'")
                                     functions.sleep(7000)
                                 }
                                 tunnelUserInput3 = functions.prompt(">>> ")
-                                functions.canWrite(tunnelUserInput3)
+                                functions.canWrite(tunnelUserInput3, mainCharacter)
                                 if (tunnelUserInput3 === "Death" || tunnelUserInput3 === "death") {
-                                    functions.ominousSpiritRiddleEnding()
+                                    functions.ominousSpiritRiddleEnding(notebook, mainCharacter)
                                 } else {
                                     console.log("Ha. Nice try, but you'll have to try harder.")
                                     functions.sleep(2000)
@@ -380,7 +382,7 @@ while (true) {
                         }
                     functions.chanceOfSuccess(2)
                     if (variables.tunnelDoorOpened === false) {
-                        if (chanceOfSuccess === "Your attempt fails!") {
+                        if (functions.chanceOfSuccess === "Your attempt fails!") {
                             variables.digCounter += 1
                             console.log("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
                             functions.quickTimeEvent(mainCharacter, 4000, 20, "Treasury")
