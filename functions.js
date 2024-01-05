@@ -68,7 +68,7 @@ function askIfPlayAgainNotDead() {
         if (endUserInput === "1") {
             console.log("Oh no! Looks like Node.js's asynchronous nature doesn't provide a way to restart!")
             console.log("Please restart manually! :)")
-            exec()
+            process.exit()
         } else if (endUserInput === "2") {
             console.log("Thanks for playing!")
             process.exit()
