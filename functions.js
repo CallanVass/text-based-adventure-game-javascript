@@ -1,10 +1,21 @@
 const globals = require('./globalVariables')
 const prompts = require('./prompts')
 const { blue, green, red, bold, yellow, black } = require('colorette')
-const { spawn } = require('child_process')
+const { spawn, exec } = require('child_process')
 
 // Allows us to call prompt in place of input()
 const prompt = require('prompt-sync')()
+const restartScriptPath = "./restart.sh"
+
+exec(`sh ${restartScriptPath}`, (error, stdout, stderr) => {
+    if (error) {
+        console.error(`Error executing the script: ${error}`)
+        return
+    }
+
+    console.log(`Script output: ${stdout}`)
+    console.error(`Script errors: ${stderr}`)
+})
 
 // Sleep function 
 function sleep(ms) {
@@ -48,7 +59,9 @@ function askIfPlayAgain() {
         options(prompts.endPromptList, "Death Screen")
         endUserInput = prompt(">>> ")
         if (endUserInput === "1") {
-            restartProgram()
+            console.log("Oh no! Looks like Node.js's asynchronous nature doesn't provide a way to restart!")
+            console.log("Please restart manually! :)")
+            process.exit()
         } else if (endUserInput === "2") {
             console.log("Thanks for playing!")
             process.exit()
@@ -64,7 +77,9 @@ function askIfPlayAgainNotDead() {
         options(prompts.endPromptList, "A state of indecision.")
         endUserInput = prompt(">>> ")
         if (endUserInput === "1") {
-            restartProgram()
+            console.log("Oh no! Looks like Node.js's asynchronous nature doesn't provide a way to restart!")
+            console.log("Please restart manually! :)")
+            exec()
         } else if (endUserInput === "2") {
             console.log("Thanks for playing!")
             process.exit()
@@ -97,31 +112,19 @@ function restartProgram() {
     child.unref() // Unreferences the child process, allowing the original process to exit
 }
 
+
 function chanceOfSuccess(percentage) {
-    const randomNums = Array.from({ length: 1 }, () => Math.floor(Math.random() * 10) + 1)
-    if (percentage === 1) {
-        if (1 in randomNums) {
-            return "Your attempt fails!"
-        } else {
-            return "Your attempt succeeds!"
-        }
-    }
-    if (percentage === 2) {
-        if ((1 || 2) in randomNums) {
-            return "Your attempt fails!"
-        } else {
-            return "Your attempt succeeds!"
-        }
-    }
-    if (percentage === 3) {
-        if ((1 || 2 || 3) in randomNums) {
-            return "Your attempt fails!"
-        } else {
-            return "Your attempt succeeds!"
-        }
-    }
-    if (percentage === 4) {
+    if (percentage < 1 || percentage > 3) {
         console.log("Callan, you turd, that's a stupidly high percentage. Change it. Now.")
+        return
+    }
+
+    const randomNum = Math.floor(Math.random() * 10) + 1
+
+    if (randomNum <= percentage) {
+        return "Your attempt succeeds!"
+    } else {
+        return "Your attempt fails!"
     }
 }
 
@@ -143,6 +146,7 @@ function quickTimeEvent(character, timeLimit, healthLost, room) {
                 character.addBloodGlut(10)
                 enemyKilled = true
                 globals.guardKilledCounter += 1
+                globals.treasuryGuardDead = true
                 break
             }
             while (quickUserInput1 === "2") {
@@ -231,29 +235,29 @@ function fightWithDracula(character, timeLimit, healthLost, enemy) {
 
 //   ASCII Art
 function youDied() {
-    console.log("  ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄ ")
-    console.log("  ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██▀ ██▌▓██▒▓█   ▀ ▒██▀ ██▌ ")
-    console.log("   ▒██ ██░▒██░  ██▒▓██  ▒██░   ░██   █▌▒██▒▒███   ░██   █▌ ")
-    console.log("   ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░▓█▄   ▌░██░▒▓█  ▄ ░▓█▄   ▌ ")
-    console.log("   ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░▒████▓ ░██░░▒████▒░▒████▓  ")
-    console.log("    ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒     ▒▒▓  ▒ ░▓  ░░ ▒░ ░ ▒▒▓  ▒  ")
-    console.log("  ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░     ░ ▒  ▒  ▒ ░ ░ ░  ░ ░ ▒  ▒  ")
-    console.log("  ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░     ░ ░  ░  ▒ ░   ░    ░ ░  ░  ")
-    console.log("  ░ ░         ░ ░     ░           ░     ░     ░  ░   ░     ")
-    console.log("  ░ ░                           ░                  ░       ")
+    console.log(red("  ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄ "))
+    console.log(red("  ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▒██▀ ██▌▓██▒▓█   ▀ ▒██▀ ██▌ "))
+    console.log(red("   ▒██ ██░▒██░  ██▒▓██  ▒██░   ░██   █▌▒██▒▒███   ░██   █▌ "))
+    console.log(red("   ░ ▐██▓░▒██   ██░▓▓█  ░██░   ░▓█▄   ▌░██░▒▓█  ▄ ░▓█▄   ▌ "))
+    console.log(red("   ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░▒████▓ ░██░░▒████▒░▒████▓  "))
+    console.log(red("    ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒     ▒▒▓  ▒ ░▓  ░░ ▒░ ░ ▒▒▓  ▒  "))
+    console.log(red("  ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░     ░ ▒  ▒  ▒ ░ ░ ░  ░ ░ ▒  ▒  "))
+    console.log(red("  ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░     ░ ░  ░  ▒ ░   ░    ░ ░  ░  "))
+    console.log(red("  ░ ░         ░ ░     ░           ░     ░     ░  ░   ░     "))
+    console.log(red("  ░ ░                           ░                  ░       "))
 }
 
 function draculasCastle() {
-    console.log(" ▓█████▄  ██▀███   ▄▄▄       ▄████▄   █    ██  ██▓    ▄▄▄        ██████     ▄████▄   ▄▄▄        ██████ ▄▄▄█████▓ ██▓    ▓█████  ▐██▌ ")
-    console.log(" ▒██▀ ██▌▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██  ▓██▒▓██▒   ▒████▄    ▒██    ▒    ▒██▀ ▀█  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██▒    ▓█   ▀  ▐██▌ ")
-    console.log(" ░██   █▌▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓██  ▒██░▒██░   ▒██  ▀█▄  ░ ▓██▄      ▒▓█    ▄ ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▒██░    ▒███    ▐██▌ ")
-    console.log(" ░▓█▄   ▌▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██   ▒   ██▒   ▒▓▓▄ ▄██▒░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██░    ▒▓█  ▄  ▓██▒ ")
-    console.log(" ░▒████▓ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒▒█████▓ ░██████▒▓█   ▓██▒▒██████▒▒   ▒ ▓███▀ ░ ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██████▒░▒████▒ ▒▄▄  ")
-    console.log("  ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ░ ░▒ ▒  ░ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒░▓  ░░░ ▒░ ░ ░▀▀▒ ")
-    console.log("  ░ ▒  ▒   ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░░ ░▒  ░ ░     ░  ▒     ▒   ▒▒ ░░ ░▒  ░ ░    ░    ░ ░ ▒  ░ ░ ░  ░ ░  ░ ")
-    console.log("  ░ ░  ░   ░░   ░   ░   ▒   ░         ░░░ ░ ░   ░ ░    ░   ▒   ░  ░  ░     ░          ░   ▒   ░  ░  ░    ░        ░ ░      ░       ░ ")
-    console.log("    ░       ░           ░  ░░ ░         ░         ░  ░     ░  ░      ░     ░ ░            ░  ░      ░               ░  ░   ░  ░ ░    ")
-    console.log("  ░                         ░                                              ░                                                         ")
+    console.log(red(" ▓█████▄  ██▀███   ▄▄▄       ▄████▄   █    ██  ██▓    ▄▄▄        ██████     ▄████▄   ▄▄▄        ██████ ▄▄▄█████▓ ██▓    ▓█████  ▐██▌ "))
+    console.log(red(" ▒██▀ ██▌▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██  ▓██▒▓██▒   ▒████▄    ▒██    ▒    ▒██▀ ▀█  ▒████▄    ▒██    ▒ ▓  ██▒ ▓▒▓██▒    ▓█   ▀  ▐██▌ "))
+    console.log(red(" ░██   █▌▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓██  ▒██░▒██░   ▒██  ▀█▄  ░ ▓██▄      ▒▓█    ▄ ▒██  ▀█▄  ░ ▓██▄   ▒ ▓██░ ▒░▒██░    ▒███    ▐██▌ "))
+    console.log(red(" ░▓█▄   ▌▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓▓█  ░██░▒██░   ░██▄▄▄▄██   ▒   ██▒   ▒▓▓▄ ▄██▒░██▄▄▄▄██   ▒   ██▒░ ▓██▓ ░ ▒██░    ▒▓█  ▄  ▓██▒ "))
+    console.log(red(" ░▒████▓ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒▒█████▓ ░██████▒▓█   ▓██▒▒██████▒▒   ▒ ▓███▀ ░ ▓█   ▓██▒▒██████▒▒  ▒██▒ ░ ░██████▒░▒████▒ ▒▄▄  "))
+    console.log(red("  ▒▒▓  ▒ ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░░▒▓▒ ▒ ▒ ░ ▒░▓  ░▒▒   ▓▒█░▒ ▒▓▒ ▒ ░   ░ ░▒ ▒  ░ ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒░▓  ░░░ ▒░ ░ ░▀▀▒ "))
+    console.log(red("  ░ ▒  ▒   ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░░▒░ ░ ░ ░ ░ ▒  ░ ▒   ▒▒ ░░ ░▒  ░ ░     ░  ▒     ▒   ▒▒ ░░ ░▒  ░ ░    ░    ░ ░ ▒  ░ ░ ░  ░ ░  ░ "))
+    console.log(red("  ░ ░  ░   ░░   ░   ░   ▒   ░         ░░░ ░ ░   ░ ░    ░   ▒   ░  ░  ░     ░          ░   ▒   ░  ░  ░    ░        ░ ░      ░       ░ "))
+    console.log(red("    ░       ░           ░  ░░ ░         ░         ░  ░     ░  ░      ░     ░ ░            ░  ░      ░               ░  ░   ░  ░ ░    "))
+    console.log(red("  ░                         ░                                              ░                                                         "))
 }
 
 // Intro
@@ -325,7 +329,7 @@ function ominousSpiritStareEnding(notebook) {
         sleep(300)
         console.log("Your heart unclenches.")
         sleep(15000)
-        notebook.reset_notebook()
+        notebook.resetNotebook()
         askIfPlayAgainNotDead()
     }
 }
@@ -343,7 +347,7 @@ function ominousSpiritRiddleEnding(notebook, character) {
         sleep(300)
         console.log("I give you this: ")
         sleep(300)
-        character.inv.addItem("Spirit's Blessing")
+        character.inv.addItem(yellow("Spirit's Blessing"))
         sleep(300)
         console.log("You feel a rush wash over you, and your bloodlust fades. You look to the spirit, but he  ")
         sleep(300)

@@ -92,7 +92,7 @@ while (true) {
         }
     
         while (userInput21 === "3") {
-        functions.selfBludgeonEnding()
+        functions.selfBludgeonEnding(notebook)
             }
         if (userInput21 === "4") {
         break
@@ -115,7 +115,6 @@ while (true) {
     // Cell Option 5
     while (userInput === "5") {
         variables.exitCellRoom = false
-        // console.log(mainCharacter.inv.hasItem("Bone Key"))
         if (variables.cellDoorOpen === true) {
             console.log("You step through the opened door")
             functions.sleep(1000)
@@ -197,6 +196,11 @@ while (true) {
                 }
             }
             while (treasuryRoomUserInput === "2") {
+                if (variables.servantUnconscious === false && variables.servantKilled === false) {
+                    console.log("You can't do that yet, you'll be heard!")
+                    functions.sleep(2000)
+                    break
+                }
                 console.log("You examine the gold coins")
                 functions.displayStats(mainCharacter)
                 functions.options(prompts.treasuryPromptList12, "Treasury")
@@ -253,7 +257,6 @@ while (true) {
                     } else {
                         functions.options(prompts.treasuryPromptList13, "Treasury")
                     }
-                    // The line below may need to go below the else statement
                     treasuryRoomUserInput2 = functions.prompt(">>> ")
                     functions.canWrite(treasuryRoomUserInput2, mainCharacter)
                     while (treasuryRoomUserInput2 === "1") {
@@ -303,7 +306,7 @@ while (true) {
                                 }
                             }
                             while (tunnelUserInput2 === "2") {
-                                if (mainCharacter.bloodGlut >= 50) {
+                                if (mainCharacter.bloodglut > 49) {
                                     console.log("'Look at you - all gorged on blood. And now you want my help? I don't think so.'")
                                     break
                                 }
@@ -360,10 +363,11 @@ while (true) {
                                     console.log("You smile.")
                                     functions.sleep(2500)
                                     variables.ominousSpiritStareCounter += 1
+                                    break
                                 } else if (variables.ominousSpiritStareCounter >= 10 && variables.ominousSpiritStareCounter < 15) {
                                     console.log("The Spirit appears to be losing his composition. You keep smiling.")
                                     functions.sleep(2500)
-                                    ominous_spirit_stare_counter += 1
+                                    variables.ominousSpiritStareCounter += 1
                                     break
                                 } else if (variables.ominousSpiritStareCounter >= 15 && variables.ominousSpiritStareCounter < 19) {
                                     console.log("He begins to sweat. Your smile widens.")
@@ -380,13 +384,12 @@ while (true) {
                             }
                             }
                         }
-                    functions.chanceOfSuccess(2)
+                    // functions.chanceOfSuccess(2)
                     if (variables.tunnelDoorOpened === false) {
-                        if (functions.chanceOfSuccess === "Your attempt fails!") {
+                        if (functions.chanceOfSuccess(2) === "Your attempt fails!") {
                             variables.digCounter += 1
                             console.log("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
                             functions.quickTimeEvent(mainCharacter, 4000, 20, "Treasury")
-                            variables.treasuryGuardDead = true
                         } else {
                         console.log("You dig some of the coins away without being heard!")
                         functions.sleep(2000)
@@ -420,7 +423,7 @@ while (true) {
                     console.log("With Dracula's key, you free the prisoners!")
                     functions.sleep(1000)
                     variables.prisonersFree = true
-                } else if (mainCharacter.inv.hasItem("Master Key")) {
+                } else if (mainCharacter.inv.hasItem("Bone Key")) {
                     console.log("You're resourceful, aren't you?")
                     functions.sleep(300)
                     console.log("You go back and forth, forging bone-shaped keys and smashing them into the locks one by one.")
@@ -456,7 +459,7 @@ while (true) {
                         while (armouryUserInput1 === "1") {
                             console.log("You lunge at the closest one, who raises his sword in defense. You dodge.")
                             functions.sleep(3000)
-                            quickTimeEvent(mainCharacter, 2000, 20, "Armoury")
+                            functions.quickTimeEvent(mainCharacter, 2000, 20, "Armoury")
                             console.log("Done with the first one, the other two charge you.")
                             functions.displayStats(mainCharacter)
                             functions.options(prompts.armouryPromptList2, "Armoury")
@@ -464,19 +467,19 @@ while (true) {
                             functions.canWrite(armouryUserInput2, mainCharacter)
                             if (armouryUserInput2 === "1") {
                                 console.log("You edge backwards, forcing them to face you one at a time.")
-                                quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
+                                functions.quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
                                 functions.display_stats(mainCharacter)
                                 console.log("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
                                 functions.sleep(3000)
-                                quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
+                                functions.quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
                                 functions.display_stats(mainCharacter)
                                 variables.armouryEntered = true
                                 break
                             } else if (armouryUserInput2 === "2") {
                                 console.log("Blindly, you rush both of them and get attacked twice in a short period.")
                                 functions.sleep(2000)
-                                quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
-                                quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
+                                functions.quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
+                                functions.quickTimeEvent(mainCharacter, 1000, 20, "Armoury")
                                 variables.armouryEntered = true
                                 break
                             }
@@ -664,7 +667,7 @@ while (true) {
                 if (mainCharacter.inv.hasItem("Master Key") === true && mainCharacter.bloodGlut <= 65) {
                     functions.mainDoorEndingWithKey()
                 } else if (mainCharacter.bloodGlut < 65) {
-                    print("You need either the Master Key or the strength to brute force it.")
+                    console.log("You need either the Master Key or the strength to brute force it.")
                     time.sleep(2.5)
                     break
                 } else if (mainCharacter.bloodGlut > 99) {
@@ -676,11 +679,12 @@ while (true) {
             while (cellRoomUserInput === "5") {
                 console.log("You step closer, reading the carving plainly with your improved vision.")
                 functions.sleep(300)
-                print(yellow("'I'll tear spleens, defeat everything and this hell to get what I want.'"))
+                console.log(yellow("'I'll tear spleens, defeat everything and this hell.'"))
                 break
             }
             if (cellRoomUserInput === "6") {
-                variables.exitCellRoom === true
+                variables.exitCellRoom = true
+                break
             }
     }
     if (variables.exitCellRoom === true) {
