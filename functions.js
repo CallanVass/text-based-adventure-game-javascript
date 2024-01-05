@@ -5,17 +5,6 @@ const { spawn, exec } = require('child_process')
 
 // Allows us to call prompt in place of input()
 const prompt = require('prompt-sync')()
-const restartScriptPath = "./restart.sh"
-
-exec(`sh ${restartScriptPath}`, (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error executing the script: ${error}`)
-        return
-    }
-
-    console.log(`Script output: ${stdout}`)
-    console.error(`Script errors: ${stderr}`)
-})
 
 // Sleep function 
 function sleep(ms) {
