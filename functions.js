@@ -487,6 +487,7 @@ module.exports = {
     intro: intro,
     selfBludgeonEnding: selfBludgeonEnding,
     askIfPlayAgain: askIfPlayAgain,
+    askIfPlayAgainNotDead: askIfPlayAgainNotDead,
     ominousSpiritStareEnding: ominousSpiritStareEnding,
     draculaSparedEnding: draculaSparedEnding,
     mainDoorEndingWithoutKey: mainDoorEndingWithoutKey,
