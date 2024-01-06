@@ -155,64 +155,64 @@ function fightWithDracula(character, timeLimit, healthLost, enemy) {
     const start = performance.now()
     quickUserInput = prompt("Quickly press Enter! ")
     const end = performance.now()
-    let timePassed = end = start
-    attackCounter++
-    while (attackCounter === 1) {
+    let timePassed = end - start
+    globals.attackCounter += 1
+    while (globals.attackCounter === 1) {
         if (quickUserInput === "" && timePassed < timeLimit) {
             console.log("You dodge her feral claws and throw back an attack of your own, catching her unaware")
             enemy.draculaLoseHealth(20)
             break
         } else {
             console.log("It slashes you across the chest, drawing thick blood to the surface.")
-            character.lostHealth(healthLost)
+            character.loseHealth(healthLost)
             checkCharacterHealth(character)
             break
         }
     }
-    while (attackCounter === 2) {
+    while (globals.attackCounter === 2) {
         if (quickUserInput === "" && timePassed < timeLimit) {
             console.log("You catch the attack, slashing her across the throat with claws of your own.")
             enemy.draculaLoseHealth(20)
             break
         } else {
             console.log("The attack slams you into a wall. You bounce back, coughing up blood.")
-            character.lostHealth(healthLost)
+            character.loseHealth(healthLost)
             checkCharacterHealth(character)
             break
         }
     }
-    while (attackCounter === 3) {
+    while (globals.attackCounter === 3) {
         if (quickUserInput === "" && timePassed < timeLimit) {
             console.log("She dives left, but you catch her attack just before it lands, rerouting the momentum.")
             enemy.draculaLoseHealth(20)
             break
         } else {
             console.log("Her attack circumnavigates your defence, piercing your ribs and puncturing a lung.")
-            character.lostHealth(healthLost)
+            character.loseHealth(healthLost)
             checkCharacterHealth(character)
             break
         }
     }
-    while (attackCounter === 4) {
+    while (globals.attackCounter === 4) {
         if (quickUserInput === "" && timePassed < timeLimit) {
             console.log("You're too quick, and catch her hand just before it smashes into your jaw.")
             enemy.draculaLoseHealth(20)
             break
         } else {
             console.log("Her hand cracks you in the jaw. You turn back, dazed.")
-            character.lostHealth(healthLost)
+            character.loseHealth(healthLost)
             checkCharacterHealth(character)
             break
         }
     }
-    while (attackCounter === 5) {
+    while (globals.attackCounter === 5) {
         if (quickUserInput === "" && timePassed < timeLimit) {
             console.log("You're too quick, and catch her hand just before it smashes into your jaw.")
             enemy.draculaLoseHealth(20)
             break
         } else {
             console.log("Her hand cracks you in the jaw. You turn back, dazed.")
-            character.lostHealth(healthLost)
+            character.loseHealth(healthLost)
             checkCharacterHealth(character)
             break
         }
@@ -247,6 +247,19 @@ function draculasCastle() {
     console.log(red("  ░ ░  ░   ░░   ░   ░   ▒   ░         ░░░ ░ ░   ░ ░    ░   ▒   ░  ░  ░     ░          ░   ▒   ░  ░  ░    ░        ░ ░      ░       ░ "))
     console.log(red("    ░       ░           ░  ░░ ░         ░         ░  ░     ░  ░      ░     ░ ░            ░  ░      ░               ░  ░   ░  ░ ░    "))
     console.log(red("  ░                         ░                                              ░                                                         "))
+}
+
+function theEnd() {
+console.log(blue("▄▄▄█████▓ ██░ ██ ▓█████    ▓█████  ███▄    █ ▓█████▄  ▐██▌"))
+console.log(blue("▓  ██▒ ▓▒▓██░ ██▒▓█   ▀    ▓█   ▀  ██ ▀█   █ ▒██▀ ██▌ ▐██▌"))
+console.log(blue("▒ ▓██░ ▒░▒██▀▀██░▒███      ▒███   ▓██  ▀█ ██▒░██   █▌ ▐██▌"))
+console.log(blue("░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄    ▒▓█  ▄ ▓██▒  ▐▌██▒░▓█▄   ▌ ▓██▒"))
+console.log(blue("  ▒██▒ ░ ░▓█▒░██▓░▒████▒   ░▒████▒▒██░   ▓██░░▒████▓  ▒▄▄ "))
+console.log(blue("  ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░   ░░ ▒░ ░░ ▒░   ▒ ▒  ▒▒▓  ▒  ░▀▀▒"))
+console.log(blue("    ░     ▒ ░▒░ ░ ░ ░  ░    ░ ░  ░░ ░░   ░ ▒░ ░ ▒  ▒  ░  ░"))
+console.log(blue("  ░       ░  ░░ ░   ░         ░      ░   ░ ░  ░ ░  ░     ░"))
+console.log(blue("          ░  ░  ░   ░  ░      ░  ░         ░    ░     ░   "))
+console.log(blue("                                              ░           "))
 }
 
 // Intro
@@ -300,6 +313,7 @@ function ominousSpiritStareEnding(notebook) {
         console.log("You're free.")
         sleep(15000)
         notebook.resetNotebook()
+        theEnd()
         askIfPlayAgainNotDead()
     } else {
         console.log("'Oh, for fucks sake!' the spirit rages. 'How can one little human be so annoying?!'")
@@ -319,6 +333,7 @@ function ominousSpiritStareEnding(notebook) {
         console.log("Your heart unclenches.")
         sleep(15000)
         notebook.resetNotebook()
+        theEnd()
         askIfPlayAgainNotDead()
     }
 }
@@ -349,6 +364,7 @@ function ominousSpiritRiddleEnding(notebook, character) {
         console.log("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         sleep(18000)
         notebook.resetNotebook()
+        theEnd()
         askIfPlayAgainNotDead()
     } else {
         console.log("If the spirit had a brow, it would be furrowed. He stands in silence for a moment, as ")
@@ -380,15 +396,17 @@ function ominousSpiritRiddleEnding(notebook, character) {
         console.log("Your heart unclenches, and you move onwards, propelled by the Ominous Spirit's blessing.")
         sleep(20000)
         notebook.resetNotebook()
+        theEnd()
         askIfPlayAgainNotDead()
     }
 
 }
 
 function mainDoorFullBloodGlutEnding(notebook) {
-    if (prisonersFree === false) {
+    if (globals.prisonersFree === false) {
         console.log("First, you free the prisoners with your immense strength.")
         sleep(300)
+    }
         console.log("You look back at the wretched place that contained you for so long, wondering if setting ")
         sleep(300)
         console.log("it ablaze would be too much. It's not worth it, you think. There's prey to hunt, and the")
@@ -402,8 +420,8 @@ function mainDoorFullBloodGlutEnding(notebook) {
         console.log("The last thing you remember is the unbearably hot sun beating down, melting your flesh...")
         sleep(18000)
         notebook.resetNotebook()
+        theEnd()
         askIfPlayAgainNotDead()
-    }
 }
 
 function mainDoorEndingWithKey(notebook) {
@@ -422,6 +440,7 @@ function mainDoorEndingWithKey(notebook) {
     console.log("You smile. It's finally over.")
     sleep(18000)
     notebook.reset_notebook()
+    theEnd()
     askIfPlayAgainNotDead()
 }
 
@@ -441,6 +460,7 @@ function mainDoorEndingWithoutKey(notebook) {
     console.log("You smile. It's finally over.")
     sleep(18000)
     notebook.reset_notebook()
+    theEnd()
     askIfPlayAgainNotDead()
 }
 
@@ -460,6 +480,7 @@ function draculaSparedEnding(notebook) {
     console.log("You've become a prince of darkness.")
     sleep(18000)
     notebook.reset_notebook()
+    theEnd()
     askIfPlayAgainNotDead()
 }
 
@@ -478,6 +499,7 @@ module.exports = {
     youDied: youDied,
     draculasCastle: draculasCastle,
     intro: intro,
+    theEnd: theEnd,
     selfBludgeonEnding: selfBludgeonEnding,
     askIfPlayAgain: askIfPlayAgain,
     askIfPlayAgainNotDead: askIfPlayAgainNotDead,

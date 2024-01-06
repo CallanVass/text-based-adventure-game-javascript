@@ -467,12 +467,13 @@ while (true) {
                             functions.canWrite(armouryUserInput2, mainCharacter)
                             if (armouryUserInput2 === "1") {
                                 console.log("You edge backwards, forcing them to face you one at a time.")
+                                functions.sleep(3000)
                                 functions.quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
-                                functions.display_stats(mainCharacter)
+                                functions.displayStats(mainCharacter)
                                 console.log("Done with the first, the other looks hesitant to approach you. You take the fight to him.")
                                 functions.sleep(3000)
                                 functions.quickTimeEvent(mainCharacter, 1500, 20, "Armoury")
-                                functions.display_stats(mainCharacter)
+                                functions.displayStats(mainCharacter)
                                 variables.armouryEntered = true
                                 break
                             } else if (armouryUserInput2 === "2") {
@@ -487,7 +488,7 @@ while (true) {
                     } else {
                     console.log("You stand in the armoury, surveying the carnage you've caused.")
                     functions.displayStats(mainCharacter)
-                    functions.options(armouryPromptList3, armoury)
+                    functions.options(prompts.armouryPromptList3, "Armoury")
                     armouryUserInput3 = functions.prompt(">>> ")
                     functions.canWrite(armouryUserInput3, mainCharacter)
                     while (armouryUserInput3 === "1") {
@@ -537,17 +538,17 @@ while (true) {
                             functions.sleep(300)
                             console.log(red("Dracula's eyes take on a faint glow. 'I've never seen an animal that wanted to die."))
                             functions.sleep(300)
-                            console.log(red(" Yet here you are,' she whispers, breaking into a tinkling laugh so violent it rattles"))
+                            console.log(red("Yet here you are,' she whispers, breaking into a tinkling laugh so violent it rattles"))
                             functions.sleep(300)
                             console.log("the plates of her armour.")
                         }
                         if (draculaChambersUserInput3 === "2") {
-                            console.log(red(" 'It's never enough. Not really. I suspect you're beginning to realise this seeing"))
+                            console.log(red("'It's never enough. Not really. I suspect you're beginning to realise this seeing"))
                             functions.sleep(300)
                             console.log(red(" as how you're becoming exactly like me.'"))
                         }
                         if (draculaChambersUserInput3 === "3") {
-                            console.log(red(" 'Yes, you do display the explicit level of corruption that I've come to demand of my servants.'"))
+                            console.log(red("'Yes, you do display the explicit level of corruption that I've come to demand of my servants.'"))
                             functions.sleep(300)
                             console.log("'I'm not corrupt,' you point out.")
                             functions.sleep(300)
@@ -577,7 +578,7 @@ while (true) {
                             functions.displayStats(mainCharacter)
                             console.log("She smiles and a spurt of blood jumps from her throat.")
                             functions.sleep(300)
-                            console.log(red(" 'You're quick. Not quick enough, though.'"))
+                            console.log(red("'You're quick. Not quick enough, though.'"))
                             functions.sleep(5000)
                             functions.fightWithDracula(mainCharacter, 500, 40, dracula)
                             dracula.checkDraculaStats()
@@ -592,18 +593,18 @@ while (true) {
                             functions.sleep(300)
                             console.log("Like stray lightning, Dracula reaches for you.")
                             functions.sleep(10000)
-                            fight_with_dracula(main_character, 0.3, 40)
+                            functions.fightWithDracula(mainCharacter, 500, 40, dracula)
                             dracula.checkDraculaStats()
                             functions.displayStats(mainCharacter)
                             console.log("You raise your hand, ready to finish the monster once and for all.")
                             functions.sleep(300)
-                            console.log(red(" 'Wait!' she shouts."))
+                            console.log(red("'Wait!' she shouts."))
                             functions.sleep(300)
-                            console.log(red("You pause.  'You don't understand this,' she sputters.  'If you kill me,"))
+                            console.log(red("You pause. 'You don't understand this,' she sputters. 'If you kill me,"))
                             functions.sleep(300)
-                            console.log(red(" you'll never understand it. Spare me, and I'll show you things you've never"))
+                            console.log(red("you'll never understand it. Spare me, and I'll show you things you've never"))
                             functions.sleep(300)
-                            console.log(red(" imagined. Worlds - completely seperate from this one.'"))
+                            console.log(red("imagined. Worlds - completely seperate from this one.'"))
                             functions.sleep(7000)
                             dracula.checkDraculaStats()
                             functions.displayStats(mainCharacter)
@@ -622,9 +623,9 @@ while (true) {
                                 functions.sleep(300)
                                 dracula.checkDraculaStats()
                                 console.log("Finally... she's dead. You stand up, still shaking from the fight.")
-                                functions.sleep(5)
+                                functions.sleep(5000)
                                 mainCharacter.inv.addItem("Master Key")
-                                functions.sleep(2)
+                                functions.sleep(2000)
                                 variables.draculaKilled = true
                                 break
                             }
@@ -651,7 +652,7 @@ while (true) {
                         functions.sleep(300)
                         console.log("'Curse this affliction,' you murmur.")
                         functions.sleep(300)
-                        checkCharacterHealth(mainCharacter)
+                        functions.checkCharacterHealth(mainCharacter)
                     }
                     if (armouryUserInput3 === "3") {
                         break
@@ -664,16 +665,16 @@ while (true) {
                 }
             }
             while (cellRoomUserInput === "4") {
-                if (mainCharacter.inv.hasItem("Master Key") === true && mainCharacter.bloodGlut <= 65) {
-                    functions.mainDoorEndingWithKey()
-                } else if (mainCharacter.bloodGlut < 65) {
+                if (mainCharacter.inv.hasItem("Master Key") && mainCharacter.bloodglut <= 65) {
+                    functions.mainDoorEndingWithKey(notebook)
+                } else if (mainCharacter.bloodglut < 65) {
                     console.log("You need either the Master Key or the strength to brute force it.")
-                    time.sleep(2.5)
+                    functions.sleep(2500)
                     break
-                } else if (mainCharacter.bloodGlut > 99) {
-                    functions.mainDoorFullBloodGlutEnding()
-                } else if (mainCharacter.bloodGlut > 65 && mainCharacter.bloodGlut < 99) {
-                    functions.mainDoorEndingWithoutKey()
+                } else if (mainCharacter.bloodglut > 99) {
+                    functions.mainDoorFullBloodGlutEnding(notebook)
+                } else if (mainCharacter.bloodglut > 65 && mainCharacter.bloodglut < 99) {
+                    functions.mainDoorEndingWithoutKey(notebook)
                 }
             }
             while (cellRoomUserInput === "5") {
