@@ -13,11 +13,6 @@ function sleep(ms) {
     }
   }
 
-// Write Notebook
-// function writeNotebook(notebook) {
-//     notebook.writeNotebook()
-// }
-
 // Read Notebook
 function appendNotebook(notebook) {
     notebook.readNotebook()
@@ -45,6 +40,7 @@ function options(optionsList, room) {
     return
 }
 
+//  Ask player if they want to play again
 function askIfPlayAgain() {
     while (true) {
         youDied()
@@ -64,6 +60,7 @@ function askIfPlayAgain() {
     }
 }
 
+// Ask player if they want to play again (without having died)
 function askIfPlayAgainNotDead() {
     while (true) {
         console.log("Would you like to play again?")
@@ -82,6 +79,7 @@ function askIfPlayAgainNotDead() {
     }
 }
 
+// Display charaacter health, bloodglut, and inventory
 function displayStats(character) {
     let prompt = "What do you want to do?"
     character.checkStats()
@@ -89,6 +87,7 @@ function displayStats(character) {
     return
 }
 
+// Check if health is 0 or not
 function checkCharacterHealth(character) {
     health = character.health
     if (health <= 0) {
@@ -96,7 +95,7 @@ function checkCharacterHealth(character) {
     }
 }
 
-
+// Restart program (doesn't work)
 function restartProgram() {
     const child = spawn(process.argv[0], process.argv.slice(1), {
         detached: true,
@@ -105,7 +104,7 @@ function restartProgram() {
     child.unref() // Unreferences the child process, allowing the original process to exit
 }
 
-
+// Indicate a chance of success 
 function chanceOfSuccess(percentage) {
     if (percentage < 1 || percentage > 3) {
         console.log("Callan, you turd, that's a stupidly high percentage. Change it. Now.")
@@ -121,6 +120,7 @@ function chanceOfSuccess(percentage) {
     }
 }
 
+// Fighting quick-time event
 function quickTimeEvent(character, timeLimit, healthLost, room) {
     let enemyKilled = false
     quickTimePromptList = ["Drain them dry!",
@@ -155,6 +155,7 @@ function quickTimeEvent(character, timeLimit, healthLost, room) {
     }
 }
 
+// Fight with Dracula (incremented and called each fight sequence)
 function fightWithDracula(character, timeLimit, healthLost, enemy) {
     const start = performance.now()
     quickUserInput = prompt("Quickly press Enter! ")
@@ -269,15 +270,15 @@ console.log(blue("                                              ░           ")
 // Intro
 function intro() {
     console.log("You awaken in a castle cell. Blood drips steadily from the bricks above, splashing into a rusty basin.")
-    // sleep(2000)
+    sleep(2000)
     console.log("Tap...")
-    // sleep(1500)
+    sleep(1500)
     console.log("Tap...")
-    // sleep(1500)
+    sleep(1500)
     console.log("Tap...")
-    // sleep(1500)
+    sleep(1500)
     console.log("The moans of distant prisoners fill the halls. In the corner is a pile of bones. Past prisoners.")
-    // sleep(1500)
+    sleep(1500)
     console.log("The bite marks on your body are from Dracula. You're a blood slave. Something's different, though.")
     sleep(300)
     console.log("Your bite marks are healing, and the strength in your limbs wills you to fight back.")
@@ -491,7 +492,6 @@ function draculaSparedEnding(notebook) {
 module.exports = {
     prompt: prompt,
     sleep: sleep,
-    // appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,
     displayStats: displayStats,

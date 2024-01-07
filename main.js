@@ -179,7 +179,7 @@ while (true) {
                     mainCharacter.addBloodGlut(30)
                     variables.servantKilled = true
                     break
-                } else if (variables.servantUnconscious === true) {
+                } else if (variables.servantUnconscious === true && variables.servantKilled === false) {
                     console.log("A change of heart, eh?")
                     functions.sleep(300)
                     console.log("You pick the man up off the floor and tear into his neck. With nobody to stop you,")
@@ -187,7 +187,7 @@ while (true) {
                     console.log("you're able to drink your fill.")
                     functions.sleep(300)
                     mainCharacter.addBloodGlut(30)
-                    servantKilled = true
+                    variables.servantKilled = true
                     break
                 } else {
                     console.log("He can't get any dead-er than he already is.")
@@ -390,6 +390,7 @@ while (true) {
                             variables.digCounter += 1
                             console.log("A guard stumbles into the room, sword half unsheathed, drawn in by the tinkling of coins.")
                             functions.quickTimeEvent(mainCharacter, 4000, 20, "Treasury")
+                            break
                         } else {
                         console.log("You dig some of the coins away without being heard!")
                         functions.sleep(2000)
