@@ -1,7 +1,7 @@
 const globals = require('./globalVariables')
 const prompts = require('./prompts')
 const { blue, green, red, bold, yellow, black } = require('colorette')
-const { spawn, exec } = require('child_process')
+const { spawn} = require('child_process')
 
 // Allows us to call prompt in place of input()
 const prompt = require('prompt-sync')()
@@ -13,20 +13,24 @@ function sleep(ms) {
     }
   }
 
-// Append Notebook
+// Write Notebook
+// function writeNotebook(notebook) {
+//     notebook.writeNotebook()
+// }
+
+// Read Notebook
 function appendNotebook(notebook) {
     notebook.readNotebook()
-    notebook.appendNotebook()
-    return
+    notebook.writeNotebook()
 }
 
 // Append Notebook 
-function canWrite(prompt, character) {
+function canWrite(prompt, character, notebook) {
     if (character.inv.hasItem("Bone Pen") === true) {
         if (prompt === "Write" || prompt === "write") {
-            appendNotebook()
+            appendNotebook(notebook)
         } else {
-            // Left Empty For No Result
+           
         }
     }
 }
@@ -439,7 +443,7 @@ function mainDoorEndingWithKey(notebook) {
     sleep(300)
     console.log("You smile. It's finally over.")
     sleep(18000)
-    notebook.reset_notebook()
+    notebook.resetNotebook()
     theEnd()
     askIfPlayAgainNotDead()
 }
@@ -459,7 +463,7 @@ function mainDoorEndingWithoutKey(notebook) {
     sleep(300)
     console.log("You smile. It's finally over.")
     sleep(18000)
-    notebook.reset_notebook()
+    notebook.resetNotebook()
     theEnd()
     askIfPlayAgainNotDead()
 }
@@ -479,7 +483,7 @@ function draculaSparedEnding(notebook) {
     sleep(300)
     console.log("You've become a prince of darkness.")
     sleep(18000)
-    notebook.reset_notebook()
+    notebook.resetNotebook()
     theEnd()
     askIfPlayAgainNotDead()
 }
@@ -487,7 +491,7 @@ function draculaSparedEnding(notebook) {
 module.exports = {
     prompt: prompt,
     sleep: sleep,
-    appendNotebook: appendNotebook,
+    // appendNotebook: appendNotebook,
     canWrite: canWrite,
     options: options,
     displayStats: displayStats,
@@ -508,6 +512,6 @@ module.exports = {
     mainDoorEndingWithoutKey: mainDoorEndingWithoutKey,
     mainDoorEndingWithKey: mainDoorEndingWithKey,
     mainDoorFullBloodGlutEnding: mainDoorFullBloodGlutEnding,
-    ominousSpiritRiddleEnding: ominousSpiritRiddleEnding
+    ominousSpiritRiddleEnding: ominousSpiritRiddleEnding,
 }
 

@@ -20,7 +20,7 @@ while (true) {
     functions.displayStats(mainCharacter)
     functions.options(prompts.cellPromptList11, "Cell")
     userInput = functions.prompt(">>> ")
-    functions.canWrite(userInput, mainCharacter)
+    functions.canWrite(userInput, mainCharacter, notebook)
     // Cell Option 1
     while (userInput === "1") {
         if (mainCharacter.bloodglut < 20) {
@@ -34,7 +34,7 @@ while (true) {
             console.log("You examine the pile of bones")
             functions.options(prompts.cellPromptList12, "Cell")
             userInput12 = functions.prompt(">>> ")
-            functions.canWrite(userInput12, mainCharacter)
+            functions.canWrite(userInput12, mainCharacter, notebook)
             while (userInput12 === "1") {
                 if (mainCharacter.inv.hasItem("Bone Key")) {
                     console.log("You've already done that.")
@@ -73,7 +73,7 @@ while (true) {
         console.log("You check the basin. The blood is as much mud as it is blood. You revolt.")
         functions.options(prompts.cellPromptList21, "Cell")
         userInput21 = functions.prompt(">>> ")
-        functions.canWrite(userInput21, mainCharacter)
+        functions.canWrite(userInput21, mainCharacter, notebook)
         while (userInput21 === "1") {
             if (mainCharacter.bloodglut >= 20) {
                 console.log("You've already done that.")
@@ -152,7 +152,7 @@ while (true) {
                 functions.options(prompts.cellRoomPromptList12, "Jail")
             }
             cellRoomUserInput = functions.prompt(">>> ")
-            functions.canWrite(cellRoomUserInput, mainCharacter)
+            functions.canWrite(cellRoomUserInput, mainCharacter, notebook)
             while (cellRoomUserInput === "1") {
                 if (variables.tresuryEntered === false) {
                     variables.tresuryEntered = true
@@ -162,12 +162,12 @@ while (true) {
                     functions.displayStats(mainCharacter)
                     functions.options(prompts.treasuryPromptList11, "Treasury")
                     treasuryRoomUserInput = functions.prompt(">>> ")
-                    functions.canWrite(treasuryRoomUserInput, mainCharacter)
+                    functions.canWrite(treasuryRoomUserInput, mainCharacter, notebook)
                 } else {
                     functions.displayStats(mainCharacter)
                     functions.options(prompts.treasuryPromptList11, "Treasury")
                     treasuryRoomUserInput = functions.prompt(">>> ")
-                    functions.canWrite(treasuryRoomUserInput, mainCharacter)
+                    functions.canWrite(treasuryRoomUserInput, mainCharacter, notebook)
                 } 
                 // Tresury Logic 
             while (treasuryRoomUserInput === "1") {
@@ -205,7 +205,7 @@ while (true) {
                 functions.displayStats(mainCharacter)
                 functions.options(prompts.treasuryPromptList12, "Treasury")
                 treasuryRoomUserInput1 = functions.prompt(">>> ")
-                functions.canWrite(treasuryRoomUserInput1, mainCharacter)
+                functions.canWrite(treasuryRoomUserInput1, mainCharacter, notebook)
                 while (treasuryRoomUserInput1 === "1") {
                     console.log("Your teeth sink straight through the metal. Yep, that's real gold alright.")
                     break
@@ -258,7 +258,7 @@ while (true) {
                         functions.options(prompts.treasuryPromptList13, "Treasury")
                     }
                     treasuryRoomUserInput2 = functions.prompt(">>> ")
-                    functions.canWrite(treasuryRoomUserInput2, mainCharacter)
+                    functions.canWrite(treasuryRoomUserInput2, mainCharacter, notebook)
                     while (treasuryRoomUserInput2 === "1") {
                         if (variables.digCounter >= 3) {
                             variables.tunnelDoorOpened = true
@@ -266,7 +266,7 @@ while (true) {
                             functions.displayStats(mainCharacter)
                             functions.options(prompts.tunnelPromptList1, "Tunnels")
                             treasuryRoomUserInput3 = functions.prompt(">>> ")
-                            functions.canWrite(treasuryRoomUserInput3, mainCharacter)
+                            functions.canWrite(treasuryRoomUserInput3, mainCharacter, notebook)
                             while (treasuryRoomUserInput3 === "1") {
                                 if (variables.tunnelTravelledDown === false) {
                                 console.log(yellow("You venture down the tunnel, closing the distance between you and the light."))
@@ -287,7 +287,7 @@ while (true) {
                                 functions.options(prompts.tunnelPromptList21, "Tunnels")
                             }
                             tunnelUserInput2 = functions.prompt(">>> ")
-                            functions.canWrite(tunnelUserInput2, mainCharacter)
+                            functions.canWrite(tunnelUserInput2, mainCharacter, notebook)
                             // Tunnel Logic
                             while (tunnelUserInput2 === "1") {
                                 if (variables.bowedBeforeOminousSpirit === false) {
@@ -338,7 +338,7 @@ while (true) {
                                     functions.sleep(7000)
                                 }
                                 tunnelUserInput3 = functions.prompt(">>> ")
-                                functions.canWrite(tunnelUserInput3, mainCharacter)
+                                functions.canWrite(tunnelUserInput3, mainCharacter, notebook)
                                 if (tunnelUserInput3 === "Death" || tunnelUserInput3 === "death") {
                                     functions.ominousSpiritRiddleEnding(notebook, mainCharacter)
                                 } else {
@@ -349,7 +349,7 @@ while (true) {
                             }
                             while (tunnelUserInput2 === "3") {
                                 if (variables.ominousSpiritStareCounter > 19) {
-                                    functions.ominousSpiritStareEnding()
+                                    functions.ominousSpiritStareEnding(notebook)
                                 } else if (variables.ominousSpiritStareCounter < 5) {
                                     console.log("The Ominous Spirit stares straight back at you, piercing your very soul. Something ")
                                     functions.sleep(300)
@@ -455,7 +455,7 @@ while (true) {
                         functions.displayStats(mainCharacter)
                         functions.options(prompts.armouryPromptList1, "Armoury")
                         armouryUserInput1 = functions.prompt(">>> ")
-                        functions.canWrite(armouryUserInput1, mainCharacter)
+                        functions.canWrite(armouryUserInput1, mainCharacter, notebook)
                         while (armouryUserInput1 === "1") {
                             console.log("You lunge at the closest one, who raises his sword in defense. You dodge.")
                             functions.sleep(3000)
@@ -464,7 +464,7 @@ while (true) {
                             functions.displayStats(mainCharacter)
                             functions.options(prompts.armouryPromptList2, "Armoury")
                             armouryUserInput2 = functions.prompt(">>> ")
-                            functions.canWrite(armouryUserInput2, mainCharacter)
+                            functions.canWrite(armouryUserInput2, mainCharacter, notebook)
                             if (armouryUserInput2 === "1") {
                                 console.log("You edge backwards, forcing them to face you one at a time.")
                                 functions.sleep(3000)
@@ -490,7 +490,7 @@ while (true) {
                     functions.displayStats(mainCharacter)
                     functions.options(prompts.armouryPromptList3, "Armoury")
                     armouryUserInput3 = functions.prompt(">>> ")
-                    functions.canWrite(armouryUserInput3, mainCharacter)
+                    functions.canWrite(armouryUserInput3, mainCharacter, notebook)
                     while (armouryUserInput3 === "1") {
                         if (variables.draculaChambersEntered === false) {
                             console.log("With a looming silence, you press forwards, inching the doors to Dracula's chamber open.")
@@ -528,7 +528,7 @@ while (true) {
                             
                         }
                         draculaChambersUserInput3 = functions.prompt(">>> ")
-                        functions.canWrite(draculaChambersUserInput3, mainCharacter)
+                        functions.canWrite(draculaChambersUserInput3, mainCharacter, notebook)
                         if (draculaChambersUserInput3 === "1") {
                             console.log(red("'Do I really?' she asks. 'People kill animals all the time. What's the difference?'"))
                             functions.sleep(300)
@@ -630,7 +630,7 @@ while (true) {
                                 break
                             }
                             if (draculaChambersUserInput4 === "2") {
-                                functions.draculaSparedEnding()
+                                functions.draculaSparedEnding(notebook)
                             }
                             break
                         }

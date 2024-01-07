@@ -1,7 +1,7 @@
 const fs = require('fs')
 const input = require('./functions')
 const { blue, green, red, bold, yellow, black } = require('colorette')
-
+const readlineSync = require('readline-sync')
 
 class Character {
     constructor(name) {
@@ -20,11 +20,11 @@ class Character {
         console.log(yellow(`Inventory: ${this.inv.getItems()}`))
     }
     checkDraculaStats() {
-        console.log(`Dracula's Health: ${this.health}/100`)
+        console.log(red(`Dracula's Health: ${this.health}/100`))
     }
     loseHealth(healthLoss) {
         this.health -= healthLoss
-        console.log(`You lost ${healthLoss} health!`)
+        console.log(red(`You lost ${healthLoss} health!`))
     }
     draculaLoseHealth(healthLoss) {
         this.health -= healthLoss
@@ -60,7 +60,7 @@ class Inventory {
 
     addItem(name) {
         this.items.push(name)
-        console.log(`You have picked up ${name}!`)
+        console.log(yellow(`You have picked up ${name}!`))
     }
     removeItem(name) {
         let index = this.items.indexOf(name)
@@ -81,25 +81,27 @@ class Inventory {
 
 class Notebook {
     readNotebook() {
-        fs.readFile('notebook.txt', 'utf8', (err, data) => {
-            if (err) {
-              console.error('Error reading file:', err)
-            } else {
-              console.log(data)
-            }
-          })
+        try {
+            const data = fs.readFileSync('notebook.txt', 'utf8');
+            console.log('Notebook content:');
+            console.log(data);
+        } catch (err) {
+            console.error('Error reading file:', err);
+        }
     }
 
-    writeNotebook(content) {
-        content = input.prompt("What would you like to write? ")
-        fs.appendFile("notebook.txt", content + "\n", (err) => {
-            if (err) {
-                console.error('Error writing to the file:', err)
-            } else {
-                console.log('Notebook updated!')
-            }
-        })
+    writeNotebook() {
+        const content = readlineSync.question("What would you like to write? ");
+
+        try {
+            fs.appendFileSync("notebook.txt", content + "\n", 'utf-8');
+            console.log('Notebook updated!');
+        } catch (err) {
+            console.error('Error writing to the file:', err);
+        }
     }
+
+
     resetNotebook() {
         fs.writeFile("notebook.txt", "", (err) => {
             if (err) {
@@ -109,12 +111,17 @@ class Notebook {
             }
         })
     }
+
     }
 
+    // const notebook = new Notebook()
 
+
+    // notebook.readNotebook()
+    // notebook.writeNotebook()
 
 module.exports = {
     Notebook: Notebook,
     Inventory: Inventory,
-    Character: Character
+    Character: Character,
 }
